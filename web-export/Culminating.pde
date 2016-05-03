@@ -5,7 +5,7 @@ Enemy[] enemies;
 
 
 void setup(){
-    
+    size(600, 800);
 }
 
 int phase, stage; 
@@ -16,8 +16,6 @@ void draw(){
 void menu(){
     
 }
-
-void 
 
 
 

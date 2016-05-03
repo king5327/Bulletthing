@@ -13,8 +13,8 @@ enemy drophalf % 75 x -1
 
 wait 10
 
-burst radial % 50 % 25
+burst radial % 50 x 25
 
 wait 5
 
-next main main end
+next main flip main end
