@@ -1,12 +1,10 @@
-//Player player;
-
 int gameState; //MENU, HOW-TO, 
 
-int up_key = false, down_key = false, left_key = false, right_key = false, lshift_key = false, z_key = false, x_key = false;
+int up_key = 0, down_key = 0, left_key = 0, right_key = 0, shift_key = 0, z_key = 0, x_key = 0;
 
 void setup() {
-    size(600, 800);
-    gameState = MENU;
+    size(500, 600);
+    gameState = 0;
 }
 
 int phase, stage; 
@@ -17,7 +15,7 @@ void menu() {
     //Two simple draws and one box to designate selection.
 }
 
-void keyPressed() {
+void keyPressed() { //Handle keypresses.
     if (key == CODED) {
         switch(keyCode) {
         case UP:
@@ -38,19 +36,19 @@ void keyPressed() {
         }
     } else {
         switch(key) {
-        case "Z":
-        case "z":
+        case 'Z':
+        case 'z':
             z_key = 1;
             break;
-        case "X":
-        case "x":
+        case 'X':
+        case 'x':
             x_key = 1;
             break;
         }
     }
 }
 
-void keyReleased() {
+void keyReleased() { //And key releases.
     if (key == CODED) {
         switch(keyCode) {
         case UP:
@@ -71,12 +69,12 @@ void keyReleased() {
         }
     } else {
         switch(key) {
-        case "Z":
-        case "z":
+        case 'Z':
+        case 'z':
             z_key = 0;
             break;
-        case "X":
-        case "x":
+        case 'X':
+        case 'x':
             x_key = 0;
             break;
         }
@@ -92,17 +90,22 @@ class ObjectsManager {
     float startTime, pauseTime, currentTime; //Handles timeline management and smooth pausing.
     boolean paused;
 
-    for (Burst burst : bursts.toArray ()) {
-        burst.tick();
-    }
-    for (Enemy enemy : enemies.toArray ()) {
-        enemy.tick();
-    }
-    for (Bullet bullet : bullets.toArray ()) {
-        if (bullet.tick()) {
-            bullet.draw();
-        } else {
-            bullets.remove(bullet);
+    void tick() {
+        for (Burst burst : (Burst[]) bursts.toArray ()) {
+            burst.tick(currentTime - startTime);
+        }
+        for (Enemy enemy : (Enemy[]) enemies.toArray ()) {
+            if(enemy.tick(currentTime - startTime)){
+                enemy.draw();
+            }else
+                enemies.remove(enemy);
+        }
+        for (Bullet bullet : (Bullet[]) bullets.toArray ()) {
+            if (bullet.tick(currentTime - startTime)) {
+                bullet.draw();
+            } else {
+                bullets.remove(bullet);
+            }
         }
     }
 }
