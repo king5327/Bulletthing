@@ -1,4 +1,4 @@
-public class Enemy extends Timeline implements Drawable {
+public class Enemy extends Bullet {
     boolean destroyOnEscape = true;
     int health = 1;
 

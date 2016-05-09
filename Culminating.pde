@@ -9,6 +9,7 @@ void setup() {
 
 int phase, stage; 
 void draw() {
+    
 }
 
 void menu() {
@@ -82,7 +83,7 @@ void keyReleased() { //And key releases.
 }
 
 class ObjectsManager {
-    Timeline timeline;
+    ArrayList timelines = new ArrayList<Timeline>();
     ArrayList bursts = new ArrayList<Burst>();
     ArrayList enemies = new ArrayList<Enemy>();
     ArrayList bullets = new ArrayList<Bullet>();
@@ -91,6 +92,10 @@ class ObjectsManager {
     boolean paused;
 
     void tick() {
+        for (Timeline line : (Timeline[]) timelines.toArray()){
+            if(! line.tick(currentTime - startTime))
+                timelines.remove(line);
+        }
         for (Burst burst : (Burst[]) bursts.toArray ()) {
             burst.tick(currentTime - startTime);
         }
