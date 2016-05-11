@@ -8,9 +8,14 @@ public class Timeline implements Tickable {
     public Timeline(String source) {
         sourceFile = source;
     }
+    
 
     boolean tick(float m) {
-        return false;
+        if(startTime == null){
+            return false; //Don't run an uninitialized timeline.
+        }else{
+            return true;
+        }
     }
 
     class Event{

@@ -9,7 +9,8 @@ void setup() {
 
 int phase, stage; 
 void draw() {
-    
+    //Cleanup, then pick stage, then run as it will.
+    background(0);
 }
 
 void menu() {
@@ -20,30 +21,30 @@ void keyPressed() { //Handle keypresses.
     if (key == CODED) {
         switch(keyCode) {
         case UP:
-            up_key = 1;
+            up_key = up_key == 0 ? 1 : up_key;
             break;
         case DOWN:
-            down_key = 1;
+            down_key = down_key == 0 ? 1 : down_key;
             break;
         case LEFT:
-            left_key = 1;
+            left_key = left_key == 0 ? 1 : left_key;
             break;
         case RIGHT:
-            right_key = 1;
+            right_key = right_key == 0 ? 1 : right_key;
             break;
         case SHIFT:
-            shift_key = 1;
+            shift_key = shift_key == 0 ? 1 : shift_key;
             break;
         }
     } else {
         switch(key) {
         case 'Z':
         case 'z':
-            z_key = 1;
+            z_key = z_key == 0 ? 1 : z_key;
             break;
         case 'X':
         case 'x':
-            x_key = 1;
+            x_key = x_key == 0 ? 1 : x_key;
             break;
         }
     }
