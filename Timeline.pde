@@ -11,7 +11,7 @@ public class Timeline implements Tickable {
     
 
     boolean tick(float m) {
-        if(startTime == null){
+        if(startTime == 0){
             return false; //Don't run an uninitialized timeline.
         }else{
             return true;

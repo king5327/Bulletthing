@@ -1,4 +1,6 @@
-int gameState; //MENU, HOW-TO, 
+int gameState = 0; //MENU, GAME, PAUSE
+ObjectsManager manager;
+Menu menu = new Menu();
 
 int up_key = 0, down_key = 0, left_key = 0, right_key = 0, shift_key = 0, z_key = 0, x_key = 0;
 
@@ -11,10 +13,13 @@ int phase, stage;
 void draw() {
     //Cleanup, then pick stage, then run as it will.
     background(0);
-}
-
-void menu() {
-    //Two simple draws and one box to designate selection.
+    switch(gameState){
+        case 0:
+            menu.draw();
+            break;
+        default:
+            break;
+    }
 }
 
 void keyPressed() { //Handle keypresses.
@@ -93,6 +98,7 @@ class ObjectsManager {
     boolean paused;
 
     void tick() {
+        currentTime = millis();
         for (Timeline line : (Timeline[]) timelines.toArray()){
             if(! line.tick(currentTime - startTime))
                 timelines.remove(line);
@@ -113,6 +119,14 @@ class ObjectsManager {
                 bullets.remove(bullet);
             }
         }
+    }
+    
+    void pause(){
+        pauseTime = millis();
+    }
+    
+    void resume(){
+        startTime += millis() - pauseTime;
     }
 }
 
