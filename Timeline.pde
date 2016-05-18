@@ -5,7 +5,7 @@ public class Timeline implements Tickable {
     int startTime;
     ArrayList events = new ArrayList<Event>();
 
-    public Timeline(String source) {
+    public Timeline(String source, GameManager m) {
         sourceFile = source;
     }
     

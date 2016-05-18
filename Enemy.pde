@@ -1,6 +1,6 @@
 public class Enemy extends Bullet {
-    boolean destroyOnEscape = true;
     int health = 1;
+    boolean contactable = true;
 
     public Enemy(String source){
         super(source);

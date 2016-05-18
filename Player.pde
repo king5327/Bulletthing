@@ -4,4 +4,8 @@ class Player implements Drawable{
         return false;
     }
     
+    void draw(){
+        
+    }
+    
 }

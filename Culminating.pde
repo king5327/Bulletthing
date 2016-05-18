@@ -1,5 +1,5 @@
 int gameState = 0; //MENU, GAME, PAUSE
-ObjectsManager manager;
+GameManager manager;
 Menu menu = new Menu();
 Player player = new Player();
 
@@ -17,6 +17,10 @@ void draw() {
     switch(gameState){
         case 0:
             menu.draw();
+            break;
+        case 1:
+            break;
+        case 2:
             break;
         default:
             break;
@@ -44,13 +48,19 @@ void keyPressed() { //Handle keypresses.
         }
     } else {
         switch(key) {
-        case 'Z':
+        case 'Z'://Four, because I'm also running on Dvorak and don't want to change layouts to play.
         case 'z':
+        case ';':
+        case ':':
             z_key = z_key == 0 ? 1 : z_key;
+            println("z hit");
             break;
         case 'X':
         case 'x':
+        case 'q':
+        case 'Q':
             x_key = x_key == 0 ? 1 : x_key;
+            println("x hit");
             break;
         }
     }
@@ -79,10 +89,14 @@ void keyReleased() { //And key releases.
         switch(key) {
         case 'Z':
         case 'z':
+        case ';':
+        case ':':
             z_key = 0;
             break;
         case 'X':
         case 'x':
+        case 'q':
+        case 'Q':
             x_key = 0;
             break;
         }

@@ -5,7 +5,7 @@ class Menu{
     int rectY = 300;
     
     void draw(){
-        if(z_key > 0){
+        if(z_key == 1){
             if(position == true){
                 position = false;
                 subMenu = 1;
@@ -13,6 +13,7 @@ class Menu{
                 gameState = 1;
                 reset();
             }
+            z_key++;
         }
         switch(subMenu){
             case 0:
@@ -55,7 +56,8 @@ class Menu{
     void drawHowTo(){
         fill(255);
         strokeWeight(0);
-        
+        textAlign(LEFT, BOTTOM);
+        text("Z to play", 10, 590);
     }
     
     void drawMapSelector(){
