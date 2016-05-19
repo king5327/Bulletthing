@@ -1,5 +1,6 @@
 public class Burst extends Timeline implements Templateable {
-
+    float x, y;    
+    
     public Burst(String source){
         super(source);
     }

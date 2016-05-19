@@ -1,4 +1,4 @@
-public class Bullet extends Timeline implements Drawable, Templateable {
+public class Bullet extends Burst implements Drawable {
     boolean friendly = false;
     boolean bomb = false;
     boolean destroyOnEscape = true;
@@ -6,9 +6,8 @@ public class Bullet extends Timeline implements Drawable, Templateable {
     int radius = 10;
     float xspeed = 0, yspeed = 0, xaccel = 0, yaccel = 0, xforce = 0, yforce = 0;
     int lastTime;
-    float x, y;
     int top, bottom, left, right, wid, hei;
-    color c = color(180, 30, 255, 180);
+    color center = color(180, 30, 255, 180), ring = color(0, 0, 0, 150);
     
     //Event extra types: 10 is change x, 
 

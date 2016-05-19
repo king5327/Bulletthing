@@ -8,4 +8,8 @@ class Player implements Drawable{
         
     }
     
+    void reset(){
+        
+    }
+    
 }
