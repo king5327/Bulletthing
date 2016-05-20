@@ -1,4 +1,4 @@
-class GameManager implement Tickable{
+class GameManager implements Tickable{
     ArrayList timelines = new ArrayList<Timeline>();
     ArrayList bursts = new ArrayList<Burst>();
     ArrayList enemies = new ArrayList<Enemy>();
@@ -46,5 +46,12 @@ class GameManager implement Tickable{
             startTime += millis() - pauseTime;
             paused = false;
         }
+    }
+    
+    void reset(){
+        timelines.clear();
+        bursts.clear();
+        enemies.clear();
+        bullets.clear();
     }
 }

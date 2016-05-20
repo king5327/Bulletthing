@@ -1,13 +1,13 @@
 public class Enemy extends Bullet {
-    int health = 1;
+    int health = 100;
+    boolean killable = true;
     boolean contactable = true;
-    boolean 
-
-    public Enemy(String source){
-        super(source);
+    
+    @Override
+    void readEvents(String source){
+        translateEvents(loadStrings("data/enemy/" + source + ".txt"));
     }
 
     void draw() {
     }
 }
-

@@ -3,9 +3,9 @@ add enemy drophalf
 // add enemy dropright
 // add enemy dropreverse
 
-//add burst downtriple
+// add burst downtriple
 add burst radial
-//add burst aimtriple
+// add burst aimtriple
 
 enemy drophalf % 50 x -1
 enemy drophalf % 25 x -1

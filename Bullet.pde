@@ -9,14 +9,15 @@ public class Bullet extends Burst implements Drawable {
     int top, bottom, left, right, wid, hei;
     color center = color(180, 30, 255, 180), ring = color(0, 0, 0, 150);
     
-    //Event extra types: 10 is change x, 
-
-    public Bullet(String source){
-        super(source);
-    }
+    //Event extra types: 20 is change x, 21 change y, 22 change xspeed, 23 change yspeed, 24 & 25 xaccel and yaccel, 26 & 27 xforce and yforce
     
     void spawn(int x, int y, int top, int bottom, int left, int right){ //Basically, a non-ticked version of this enemy can be defined too for easy cloning.
         
+    }
+    
+    //@Override
+    private void readEvents(String source){
+        translateEvents(loadStrings("data/bullet/" + source + ".txt"));
     }
     
     boolean tick(int time){
@@ -34,7 +35,8 @@ public class Bullet extends Burst implements Drawable {
 
     void draw() {
         ellipseMode(RADIUS);
-        fill(c);
+        fill(center);
+        stroke(ring);
         ellipse(50, 50, 30, 30);
     }
 }
