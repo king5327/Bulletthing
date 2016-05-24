@@ -3,8 +3,12 @@ public class Burst extends Timeline implements Templateable {
     Burst linkedBurst = null;
     boolean linked = false;
     
+    public Burst(String source){
+        super(source);
+    }
+    
     //@Override
-    private void readEvents(String source){
+    void readEvents(String source){
         translateEvents(loadStrings("data/burst/" + source + ".txt"));
     }
     
@@ -13,4 +17,3 @@ public class Burst extends Timeline implements Templateable {
     }
     
 }
-

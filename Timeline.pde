@@ -4,19 +4,18 @@ public class Timeline implements Tickable {
     String sourceFile;
     int startTime;
     Event nextEvent = new Event("null");
-    static HashMap templates = new HashMap();
     boolean over = false;
 
     private Timeline(){
-        
+        //Empty
     }
 
     public Timeline(String source) {
         sourceFile = source;
-        readEvents();
+        readEvents(source);
     }
     
-    private void readEvents(String source){
+    void readEvents(String source){
         //Work out the list of events as read from the file.
         translateEvents(loadStrings("data/timeline/" + source + ".txt"));
     }
@@ -32,17 +31,17 @@ public class Timeline implements Tickable {
     private Event translateEvent(String line){
         //Then, process the lines into events
         //Always call the superclass's  translateEvent to ensure you don't lose any methods from above, unless it's this top class.
-       String[] split = line.split();
+       String[] split = line.split(" ");
+       Event e = new Event();
        if(split.length != 0){
-               switch(split[0]){
+           switch(split[0]){
                case "":
                case "//":
                    break;
                case "enemy":
                    if(!templates.containsKey("enemy " + split[1]))
-                       templates.add("enemy " + split[1], new Enemy(split[1]));
-                   Event e = new Event("enemy");
-                   e.eventType = 1;
+                       templates.put("enemy " + split[1], new Enemy(split[1]));
+                   e = new Event("enemy");
                    e.datum = new String[3]; e.datum[0] = split[1]; e.datum[1] = split[2]; e.datum[2] = split[4];
                    e.extraArgs = new int[2]; e.extraArgs[0] = Integer.parseInt(split[3]); e.extraArgs[1] = Integer.parseInt(split[4]);
                    break;
@@ -50,10 +49,11 @@ public class Timeline implements Tickable {
                    break;
                case "bullet":
                    if(!templates.containsKey("bullet " + split[1])){
-                       templates.add("bullet "+split[1], new Bullet(split[1]));
+                       templates.put("bullet "+split[1], new Bullet(split[1]));
                    }
                    break;
                case "wait":
+                   e = new Event("wait");
                    break;
                case "end":
                    break;
@@ -61,14 +61,17 @@ public class Timeline implements Tickable {
                    break;
            }
         }
+        return e;
     }
     
-    private Event processEvent(Event e){
-        //Finally, handle the events. Should always super.processEvent(e) as a default case, except this is the top class.
+    private void processEvent(Event e){
+        switch(nextEvent.eventType){
+            case "enemy":
+        }
     }
 
     boolean tick(float m) {
-        if(startTime == 0 || over = true){
+        if(startTime == 0 || over){
             return false; //Don't run an uninitialized timeline.
         }else{
             return true;
@@ -87,4 +90,3 @@ public class Timeline implements Tickable {
         }
     }
 }
-

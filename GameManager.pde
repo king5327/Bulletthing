@@ -1,4 +1,4 @@
-class GameManager implements Tickable{
+class GameManager{
     ArrayList timelines = new ArrayList<Timeline>();
     ArrayList bursts = new ArrayList<Burst>();
     ArrayList enemies = new ArrayList<Enemy>();

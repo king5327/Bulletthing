@@ -3,6 +3,10 @@ public class Enemy extends Bullet {
     boolean killable = true;
     boolean contactable = true;
     
+    public Enemy(String source){
+        super(source);
+    }
+    
     @Override
     void readEvents(String source){
         translateEvents(loadStrings("data/enemy/" + source + ".txt"));

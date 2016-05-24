@@ -11,12 +11,16 @@ public class Bullet extends Burst implements Drawable {
     
     //Event extra types: 20 is change x, 21 change y, 22 change xspeed, 23 change yspeed, 24 & 25 xaccel and yaccel, 26 & 27 xforce and yforce
     
+    public Bullet(String source){
+        super(source);
+    }
+    
     void spawn(int x, int y, int top, int bottom, int left, int right){ //Basically, a non-ticked version of this enemy can be defined too for easy cloning.
         
     }
     
     //@Override
-    private void readEvents(String source){
+    void readEvents(String source){
         translateEvents(loadStrings("data/bullet/" + source + ".txt"));
     }
     
@@ -39,5 +43,8 @@ public class Bullet extends Burst implements Drawable {
         stroke(ring);
         ellipse(50, 50, 30, 30);
     }
+    
+    float getX(){return x;}
+    float getY(){return y;}
+    float getRadius(){return radius;}
 }
-
