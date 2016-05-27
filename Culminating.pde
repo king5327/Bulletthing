@@ -1,31 +1,30 @@
 int gameState = 0; //MENU, GAME, PAUSE
-GameManager manager;
+GameManager manager = new GameManager();
 Menu menu = new Menu();
 Player player = new Player();
-HashMap templates = new HashMap();
-int gameleft = 10, gameright = 390, gametop = 10, gamebottom = 590;
+HashMap templates = new HashMap(); //This would normally go inside Timeline, but can't make static fields because of processing.
 
 int up_key = 0, down_key = 0, left_key = 0, right_key = 0, shift_key = 0, z_key = 0, x_key = 0;
+int left = 25, right = 375, up = 25, down = 575;
 
 void setup() {
     size(500, 600);
     gameState = 0;
+    manager.timelines.add(new Timeline("core-main"));
+    window = new Window
 }
 
 int phase, stage; 
 void draw() {
     //Cleanup, then pick stage, then run as it will.
+    background(0);
     switch(gameState){
         case 0:
-            background(0);
             menu.draw();
             break;
         case 1:
-            background(255);
-            //Here you tick the game, and then draw it
             break;
         case 2:
-            //Here, the drawing should happen, then a semi-transparent filter, then the actual menu
             break;
         default:
             break;
@@ -58,14 +57,14 @@ void keyPressed() { //Handle keypresses.
         case ';':
         case ':':
             z_key = z_key == 0 ? 1 : z_key;
-            //println("z hit");
+            println("z hit");
             break;
         case 'X':
         case 'x':
         case 'q':
         case 'Q':
             x_key = x_key == 0 ? 1 : x_key;
-            //println("x hit");
+            println("x hit");
             break;
         }
     }

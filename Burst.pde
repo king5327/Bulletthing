@@ -4,10 +4,10 @@ public class Burst extends Timeline implements Templateable {
     boolean linked = false;
     
     public Burst(String source){
-        super(source);
+        super();
     }
     
-    //@Override
+    @Override
     void readEvents(String source){
         translateEvents(loadStrings("data/burst/" + source + ".txt"));
     }

@@ -1,4 +1,4 @@
-class GameManager{
+class GameManager implements Tickable{
     ArrayList timelines = new ArrayList<Timeline>();
     ArrayList bursts = new ArrayList<Burst>();
     ArrayList enemies = new ArrayList<Enemy>();
@@ -7,7 +7,7 @@ class GameManager{
     float startTime, pauseTime, currentTime; //Handles timeline management and smooth pausing.
     boolean paused;
 
-    void tick() {
+    boolean tick(float time) {
         currentTime = millis();
         player.draw();
         for (Timeline line : (Timeline[]) timelines.toArray()){
@@ -32,6 +32,7 @@ class GameManager{
                 bullets.remove(bullet);
             }
         }
+        return true;
     }
     
     void pause(){

@@ -1,24 +1,24 @@
 class Player implements Drawable{
     
-    float x, y, radius;
-    
+    float x, y;
     
     boolean collide(Drawable other){
-        if(Math.pow(Math.pow(x - other.getX(), 2) + Math.pow(y - other.getY(), 2), 1/2) < radius + other.getRadius())
-            return true;
         return false;
     }
     
-    void draw(){
+    void move(){
         
+    }
+    
+    void draw(){
+        stroke(127);
+        fill(255);
+        ellipseMode(RADIUS);
+        ellipse(x, y, 10, 10);
     }
     
     void reset(){
         
     }
-    
-    float getX(){return x;}
-    float getY(){return y;}
-    float getRadius(){return radius;}
     
 }

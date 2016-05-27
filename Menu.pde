@@ -5,15 +5,6 @@ class Menu{
     int rectY = 300;
     
     void draw(){
-        switch(subMenu){
-            case 0:
-                drawMenu();
-                break;
-            case 1:
-                drawHowTo();
-                break;
-        }
-        
         if(z_key == 1){
             if(position == true){
                 position = false;
@@ -23,6 +14,14 @@ class Menu{
                 reset();
             }
             z_key++;
+        }
+        switch(subMenu){
+            case 0:
+                drawMenu();
+                break;
+            case 1:
+                drawHowTo();
+                break;
         }
         
     }
