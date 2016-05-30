@@ -3,26 +3,30 @@ GameManager manager = new GameManager();
 Menu menu = new Menu();
 Player player = new Player();
 HashMap templates = new HashMap(); //This would normally go inside Timeline, but can't make static fields because of processing.
+Window window;
 
 int up_key = 0, down_key = 0, left_key = 0, right_key = 0, shift_key = 0, z_key = 0, x_key = 0;
-int left = 25, right = 375, up = 25, down = 575;
+int left = 25, right = 375, top = 25, bottom = 575;
 
 void setup() {
     size(500, 600);
     gameState = 0;
     manager.timelines.add(new Timeline("core-main"));
-    window = new Window
+    window = new Window(left, right, top, bottom);
 }
 
 int phase, stage; 
 void draw() {
     //Cleanup, then pick stage, then run as it will.
-    background(0);
     switch(gameState){
         case 0:
+            background(0);
             menu.draw();
             break;
         case 1:
+            background(200);
+            player.draw();
+            window.draw();
             break;
         case 2:
             break;
