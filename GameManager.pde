@@ -6,10 +6,18 @@ class GameManager implements Tickable{
 
     float startTime, pauseTime, currentTime; //Handles timeline management and smooth pausing.
     boolean paused;
+    
+    boolean start(){
+        return true;
+    }
 
-    boolean tick(float time) {
+    boolean tick(float time){
+        return tick();
+    }
+
+    boolean tick() {
         currentTime = millis();
-        player.draw();
+        player.move();
         for (Timeline line : (Timeline[]) timelines.toArray()){
             if(! line.tick(currentTime - startTime))
                 timelines.remove(line);
@@ -32,6 +40,7 @@ class GameManager implements Tickable{
                 bullets.remove(bullet);
             }
         }
+        player.draw();
         return true;
     }
     

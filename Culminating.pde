@@ -1,4 +1,4 @@
-int gameState = 0; //MENU, GAME, PAUSE
+int gameState = 0; //MENU, PREGAME, GAME, PAUSE
 GameManager manager = new GameManager();
 Menu menu = new Menu();
 Player player = new Player();
@@ -13,6 +13,7 @@ void setup() {
     gameState = 0;
     manager.timelines.add(new Timeline("core-main"));
     window = new Window(left, right, top, bottom);
+    frameRate(60);
 }
 
 int phase, stage; 
@@ -24,11 +25,19 @@ void draw() {
             menu.draw();
             break;
         case 1:
+            if(manager.start()){
+                gameState = 2;
+            }else{
+                gameState = 0;
+                menu.reset();
+                break;
+            }
+        case 2:
             background(200);
-            player.draw();
+            manager.tick();
             window.draw();
             break;
-        case 2:
+        case 3:
             break;
         default:
             break;
