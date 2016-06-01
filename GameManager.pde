@@ -18,21 +18,25 @@ class GameManager implements Tickable{
     boolean tick() {
         currentTime = millis();
         player.move();
-        for (Timeline line : (Timeline[]) timelines.toArray()){
+        for (Object obj : timelines.toArray()){
+            Timeline line = (Timeline) obj;
             if(! line.tick(currentTime - startTime))
                 timelines.remove(line);
         }
-        for (Burst burst : (Burst[]) bursts.toArray ()) {
+        for (Object obj : bursts.toArray ()) {
+            Burst burst = (Burst) obj;
             burst.tick(currentTime - startTime);
         }
-        for (Enemy enemy : (Enemy[]) enemies.toArray ()) {
+        for (Object obj : enemies.toArray ()) {
+            Enemy enemy = (Enemy) obj;
             if(enemy.tick(currentTime - startTime)){
                 enemy.draw();
                 player.collide(enemy);
             }else
                 enemies.remove(enemy);
         }
-        for (Bullet bullet : (Bullet[]) bullets.toArray ()) {
+        for (Object obj : bullets.toArray ()) {
+            Bullet bullet = (Bullet) obj;
             if (bullet.tick(currentTime - startTime)) {
                 bullet.draw();
                 player.collide(bullet);

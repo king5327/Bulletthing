@@ -1,7 +1,7 @@
 int gameState = 0; //MENU, PREGAME, GAME, PAUSE
 GameManager manager = new GameManager();
 Menu menu = new Menu();
-Player player = new Player();
+Player player;
 HashMap templates = new HashMap(); //This would normally go inside Timeline, but can't make static fields because of processing.
 Window window;
 
@@ -14,6 +14,7 @@ void setup() {
     manager.timelines.add(new Timeline("core-main"));
     window = new Window(left, right, top, bottom);
     frameRate(60);
+    player = new Player(left, right, top, bottom);
 }
 
 int phase, stage; 
