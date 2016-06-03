@@ -1,4 +1,4 @@
-public class Bullet extends Burst implements Drawable {
+public class Bullet extends Burst implements Drawable, Collideable {
     boolean friendly = false;
     boolean bomb = false;
     boolean destroyOnEscape = true;
@@ -10,8 +10,6 @@ public class Bullet extends Burst implements Drawable {
     color center = color(180, 30, 255, 180), ring = color(0, 0, 0, 150);
     boolean grazed = false;
     boolean alive = true;
-    
-    //Event extra types: 20 is change x, 21 change y, 22 change xspeed, 23 change yspeed, 24 & 25 xaccel and yaccel, 26 & 27 xforce and yforce
     
     public Bullet(String source){
         super(source);
@@ -32,6 +30,10 @@ public class Bullet extends Burst implements Drawable {
         lastTime = time;
         x += xspeed * time/1000;
         y += yspeed * time/1000;
+        xspeed += xaccel * time/1000;
+        yspeed += yaccel * time/1000;
+        xaccel += xforce * time/1000;
+        yaccel += yforce * time/1000;
         
         if(((x + wid < left || x > right) || (y + hei < top || y > bottom)) && destroyOnEscape || !alive){
             return false;
@@ -44,5 +46,23 @@ public class Bullet extends Burst implements Drawable {
         fill(center);
         stroke(ring);
         ellipse(50, 50, 30, 30);
+    }
+    
+    boolean collide(Collideable other){
+        if(radius + other.getRadius() < pow(pow(x - other.getX(), 2) + pow(y - other.getY(), 2),1/2)){
+            other.collided();
+            return true;
+        }
+        return false;
+    }
+    
+    float getX(){return x;}
+    float getY(){return y;}
+    float setX(float newX){x = newX; return x;}
+    float setY(float newY){y = newY; return y;}
+    float getRadius(){return radius;};
+    
+    void collided(){
+        alive = false;
     }
 }

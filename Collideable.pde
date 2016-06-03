@@ -1,9 +1,10 @@
 interface Collideable extends Drawable{
-    boolean Collide(Collideable other);
+    boolean collide(Collideable other);
     float getX();
     float getY();
-    float setX();
-    float setY();
-    float destroy();
+    float setX(float newX);
+    float setY(float newY);
+    float getRadius();
+    void collided();
     
 }

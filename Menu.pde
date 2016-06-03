@@ -55,7 +55,7 @@ class Menu{
     
     void drawHowTo(){
         fill(255);
-        strokeWeight(0);
+        strokeWeight(0); //Amazing preparation for what is currently absolutely no text.
         textAlign(LEFT, BOTTOM);
         text("Z to play", 10, 590);
     }

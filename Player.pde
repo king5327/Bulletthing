@@ -1,14 +1,14 @@
 class Player implements Drawable, Collideable{
     
     float x = width/2, y = height/2;
-    int grazeRadius = 15, hitRadius = 2;
+    int grazeRadius = 9, hitRadius = 2;
     int speed = 5, focusSpeed = 1;
     
     public Player(int left, int right, int top, int bottom){
         x = (left + right)/2; y = (bottom + top)*17/20;
     }
     
-    boolean collide(Drawable other){
+    boolean collide(Collideable other){ //This is more important than the other ones since it handles both the hit and graze for Player.
         return false;
     }
     
@@ -48,6 +48,17 @@ class Player implements Drawable, Collideable{
             noStroke();
             ellipse(x, y, hitRadius, hitRadius);
         }
+    }
+    
+    float getX(){return x;}
+    float getY(){return y;}
+    float setX(float newX){x = newX; return x;}
+    float setY(float newY){y = newY; return y;}
+    float getRadius(){return hitRadius;}
+    
+    
+    void collided(){
+        Object nil = null;
     }
     
     void reset(){

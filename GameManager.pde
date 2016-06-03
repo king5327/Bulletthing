@@ -15,7 +15,7 @@ class GameManager implements Tickable{
         return tick();
     }
 
-    boolean tick() {
+    boolean tick() { //Good lord I haven't even gotten to the bullets the player spawns. I cry.
         currentTime = millis();
         player.move();
         for (Object obj : timelines.toArray()){
