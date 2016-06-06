@@ -15,7 +15,7 @@ public class Bullet extends Burst implements Drawable, Collideable {
         super(source);
     }
     
-    void spawn(int x, int y, int top, int bottom, int left, int right){ //Basically, a non-ticked version of this enemy can be defined too for easy cloning.
+    void spawn(Timeline.Event e){ //Basically, a non-ticked version of this enemy can be defined too for easy cloning.
         
     }
     

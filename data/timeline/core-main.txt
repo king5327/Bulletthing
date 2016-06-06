@@ -1,19 +1,10 @@
-add enemy drophalf
-// add enemy dropleft
-// add enemy dropright
-// add enemy dropreverse
-
-// add burst downtriple
-add burst radial
-// add burst aimtriple
-
-enemy drophalf % 50 x -1
-enemy drophalf % 25 x -1
-enemy drophalf % 75 x -1
+enemy drophalf %x 50 y -1
+enemy drophalf %x 25 y -1
+enemy drophalf %x 75 y -1
 
 wait 10
 
-burst radial % 50 x 25
+burst radial %x 50 y 25
 
 wait 5
 

@@ -5,6 +5,9 @@ public class Timeline implements Tickable {
     int startTime;
     Event nextEvent = new Event("null");
     boolean over = false;
+    
+    boolean waiting;
+    float waitUntil;
 
     private Timeline(){
         
@@ -39,6 +42,7 @@ public class Timeline implements Tickable {
                switch(split[0]){
                case "":
                case "//":
+               case "null":
                    break;
                case "enemy":
                    if(!templates.containsKey("enemy " + split[1]))
@@ -47,15 +51,27 @@ public class Timeline implements Tickable {
                    e.datum = Utility.arraySub(split, 1, split.length);
                    break;
                case "burst":
+                   if(!templates.containsKey("burst " + split[1])){
+                       templates.put("burst "+split[1], new Burst(split[1]));
+                   }
+                   e.eventType = "burst";
+                   e.datum = Utility.arraySub(split, 1, split.length);
                    break;
-               case "bullet":
+               case "bullet": //Literally just copies it into the list, as above. I should handle this better but overall it doesn't matter.
                    if(!templates.containsKey("bullet " + split[1])){
                        templates.put("bullet "+split[1], new Bullet(split[1]));
                    }
+                   e.eventType = "bullet";
+                   e.datum = Utility.arraySub(split, 1, split.length);
                    break;
                case "wait":
+                   e.eventType = "wait";
+                   e.data.put("time", new Integer(Integer.parseInt(split[1])));
                    break;
                case "end":
+               case "finish":
+               case "stop":
+                   e.eventType = "end";
                    break;
                default:
                    break;
@@ -64,22 +80,47 @@ public class Timeline implements Tickable {
         return e;
     }
     
-    void processEvent(Event e){
-        //Finally, handle the events. Should always super.processEvent(e) as a default case, except this is the top class.
+    boolean processEvent(Event e, int time){
+        switch(e.eventType){
+            case "wait":
+                waitUntil = time + waitUntil;
+                waiting = true;
+                break;
+            case "burst":
+                templates.get("burst " + e.datum[0]);
+            default:
+                break;
+        }
+        return true;
     }
 
-    boolean tick(float m) {
+    boolean tick(int m) {
         if(startTime == 0 || over == true){
-            return false; //Don't run an uninitialized timeline.
+            return false;
         }else{
-            processEvent(nextEvent);
+            if(waiting){
+                if(m > waitUntil){
+                    waiting = false;
+                }
+                else{
+                    return true;
+                }
+            }
+            if(processEvent(nextEvent, m)){
+                nextEvent = nextEvent.next;
+            }
             return true;
         }
+    }
+    
+    void interrupt(){
+        waiting = false;
     }
 
     class Event{
         public String eventType = "null"; //0 is null, 1 is enemy, 2 is burst, 3 is bullet, 4 is end
-        public String[] datum; //In other words, if string or complex data ever needs moving.
+        public String[] datum; //In other words, if string or complex data ever needs moving. Will be obsoleted by data eventually;
+        public HashMap data = new HashMap<Object, Object>();
         public Event next = null; //Next event, one way linked-list style. No need to ever go back, so leave the old ones to garbage collection
         public Event(){
         }

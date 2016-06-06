@@ -4,14 +4,14 @@ class GameManager implements Tickable{
     ArrayList enemies = new ArrayList<Enemy>();
     ArrayList bullets = new ArrayList<Bullet>();
 
-    float startTime, pauseTime, currentTime; //Handles timeline management and smooth pausing.
+    int startTime, pauseTime, currentTime; //Handles timeline management and smooth pausing.
     boolean paused;
     
     boolean start(){
         return true;
     }
 
-    boolean tick(float time){
+    boolean tick(int time){
         return tick();
     }
 
@@ -60,6 +60,10 @@ class GameManager implements Tickable{
             startTime += millis() - pauseTime;
             paused = false;
         }
+    }
+    
+    void interrupt(){
+        resume();
     }
     
     void reset(){

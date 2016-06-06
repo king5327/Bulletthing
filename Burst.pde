@@ -12,7 +12,7 @@ public class Burst extends Timeline implements Templateable {
         translateEvents(loadStrings("data/burst/" + source + ".txt"));
     }
     
-    void spawn(int x, int y, int top, int bottom, int left, int right){
+    void spawn(Timeline.Event e){
         
     }
     
