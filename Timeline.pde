@@ -48,21 +48,24 @@ public class Timeline implements Tickable {
                    if(!templates.containsKey("enemy " + split[1]))
                        templates.put("enemy " + split[1], new Enemy(split[1]));
                    e.eventType = "enemy";
-                   e.datum = Utility.arraySub(split, 1, split.length);
+                   e.data.put("type", split[1]);
+                   Utility.toMap(e.data, Utility.arraySub(split, 2, split.length));
                    break;
                case "burst":
                    if(!templates.containsKey("burst " + split[1])){
                        templates.put("burst "+split[1], new Burst(split[1]));
                    }
                    e.eventType = "burst";
-                   e.datum = Utility.arraySub(split, 1, split.length);
+                   e.data.put("type", split[1]);
+                   Utility.toMap(e.data, Utility.arraySub(split, 2, split.length));
                    break;
                case "bullet": //Literally just copies it into the list, as above. I should handle this better but overall it doesn't matter.
                    if(!templates.containsKey("bullet " + split[1])){
                        templates.put("bullet "+split[1], new Bullet(split[1]));
                    }
-                   e.eventType = "bullet";
-                   e.datum = Utility.arraySub(split, 1, split.length);
+                   e.eventType = "bullet"; 
+                   e.data.put("type", split[1]);
+                   Utility.toMap(e.data, Utility.arraySub(split, 2, split.length));
                    break;
                case "wait":
                    e.eventType = "wait";
@@ -87,7 +90,7 @@ public class Timeline implements Tickable {
                 waiting = true;
                 break;
             case "burst":
-                templates.get("burst " + e.datum[0]);
+                ((Burst) templates.get("burst " + e.datum[0])).spawn(e);
             default:
                 break;
         }

@@ -8,5 +8,9 @@ static class Utility{
         return newarray;
     }
     
-    
+    public static void toMap(HashMap<Object, Object> m, String... s){ //Should take strings, assign the even indices as keys and the odds as values to the given map.
+        for(int position = 0; position < s.length - 1;){
+            m.put(s[position++], s[position++]);
+        }
+    }
 }
