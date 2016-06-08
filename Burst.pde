@@ -4,7 +4,7 @@ public class Burst extends Timeline implements Templateable {
     boolean linked = false;
     
     public Burst(String source){
-        super();
+        super(source);
     }
     
     @Override

@@ -86,11 +86,17 @@ public class Timeline implements Tickable {
     boolean processEvent(Event e, int time){
         switch(e.eventType){
             case "wait":
-                waitUntil = time + waitUntil;
+                waitUntil = time + ((Integer) e.data.get("time")).intValue();
                 waiting = true;
                 break;
             case "burst":
                 ((Burst) templates.get("burst " + e.datum[0])).spawn(e);
+            case "bullet":
+                ((Bullet) templates.get("bullet " + e.datum[0])).spawn(e);
+            case "enemy":
+                ((Enemy) templates.get("enemy  " + e.datum[0])).spawn(e);
+            case "end":
+                over = true;
             default:
                 break;
         }
