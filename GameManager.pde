@@ -8,6 +8,10 @@ class GameManager implements Tickable{
     boolean paused;
     
     boolean start(){
+        for(Object obj : timelines.toArray()){
+            Timeline line = (Timeline) obj;
+            line.start(millis() - startTime);
+        }
         return true;
     }
 
@@ -41,6 +45,7 @@ class GameManager implements Tickable{
                 bullet.draw();
                 player.collide(bullet);
             } else {
+                println("bullet deleted");
                 bullets.remove(bullet);
             }
         }

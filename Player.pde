@@ -10,6 +10,7 @@ class Player implements Drawable, Collideable{
     }
     
     boolean collide(Collideable other){ //This is more important than the other ones since it handles both the hit and graze for Player.
+        
         return false;
     }
     

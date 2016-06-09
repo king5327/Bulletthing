@@ -8,7 +8,7 @@ public class Enemy extends Bullet {
     }
     
     @Override
-    void readEvents(String source){
+    public void readEvents(String source){
         translateEvents(loadStrings("data/enemy/" + source + ".txt"));
     }
 

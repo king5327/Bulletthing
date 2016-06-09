@@ -1,3 +1,3 @@
 public interface Templateable{
-    void spawn(Timeline.Event e);
+    Templateable spawn(Timeline.Event e);
 }

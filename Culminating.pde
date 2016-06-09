@@ -27,6 +27,7 @@ void draw() {
             break;
         case 1:
             if(manager.start()){
+                print("Started");
                 gameState = 2;
             }else{
                 gameState = 0;
