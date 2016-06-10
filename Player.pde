@@ -15,29 +15,31 @@ class Player implements Drawable, Collideable{
     }
     
     void move(){
-        int v_mode = 0, h_mode = 0;
-        if(up_key > 0){
-            v_mode += shift_key == 0 ? speed : focusSpeed;
+        if(!manager.paused){
+            int v_mode = 0, h_mode = 0;
+            if(up_key > 0){
+                v_mode += shift_key == 0 ? speed : focusSpeed;
+            }
+            if(down_key > 0){
+                v_mode -= shift_key == 0 ? speed : focusSpeed;
+            }
+            if(left_key > 0){
+                h_mode -= shift_key == 0 ? speed : focusSpeed;
+            }
+            if(right_key > 0){
+                h_mode += shift_key == 0 ? speed : focusSpeed;
+            }
+            x += h_mode * 60 / frameRate;
+            y -= v_mode * 60 / frameRate;
+            if(x + hitRadius > right)
+                x = right - hitRadius;
+            else if(x - hitRadius < left)
+                x = left + hitRadius;
+            if(y + hitRadius > bottom)
+                y = bottom - hitRadius;
+            else if(y - hitRadius < top)
+                y = top + hitRadius;
         }
-        if(down_key > 0){
-            v_mode -= shift_key == 0 ? speed : focusSpeed;
-        }
-        if(left_key > 0){
-            h_mode -= shift_key == 0 ? speed : focusSpeed;
-        }
-        if(right_key > 0){
-            h_mode += shift_key == 0 ? speed : focusSpeed;
-        }
-        x += h_mode * 60 / frameRate;
-        y -= v_mode * 60 / frameRate;
-        if(x + hitRadius > right)
-            x = right - hitRadius;
-        else if(x - hitRadius < left)
-            x = left + hitRadius;
-        if(y + hitRadius > bottom)
-            y = bottom - hitRadius;
-        else if(y - hitRadius < top)
-            y = top + hitRadius;
     }
     
     void draw(){
@@ -45,6 +47,7 @@ class Player implements Drawable, Collideable{
             stroke(127, 127, 127, 100);
             fill(255, 255, 255, 200);
             ellipseMode(RADIUS);
+            strokeWeight(0);
             ellipse(x, y, grazeRadius, grazeRadius);
             if(shift_key > 0){
                 fill(0);

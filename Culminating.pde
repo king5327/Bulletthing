@@ -5,7 +5,7 @@ Player player;
 HashMap templates = new HashMap(); //This would normally go inside Timeline, but can't make static fields because of processing.
 Window window;
 
-int up_key = 0, down_key = 0, left_key = 0, right_key = 0, shift_key = 0, z_key = 0, x_key = 0;
+int up_key = 0, down_key = 0, left_key = 0, right_key = 0, shift_key = 0, z_key = 0, x_key = 0, esc_key;
 int left = 25, right = 375, top = 25, bottom = 575;
 
 void setup() {
@@ -36,10 +36,15 @@ void draw() {
             }
         case 2:
             background(200);
+            manager.resume();
             manager.tick();
             window.draw();
             break;
         case 3:
+            background(200);
+            manager.pause();
+            manager.tick();
+            window.draw();
             break;
         default:
             break;
@@ -81,6 +86,10 @@ void keyPressed() { //Handle keypresses.
             x_key = x_key == 0 ? 1 : x_key;
             println("x hit");
             break;
+        case ESC:
+            esc_key = esc_key == 0 ? 1 : esc_key;
+            key = 0;
+            break;
         }
     }
 }
@@ -117,6 +126,10 @@ void keyReleased() { //And key releases.
         case 'q':
         case 'Q':
             x_key = 0;
+            break;
+        case ESC:
+            esc_key = 0;
+            key = 0;
             break;
         }
     }

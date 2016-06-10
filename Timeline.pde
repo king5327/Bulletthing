@@ -16,6 +16,7 @@ public class Timeline implements Tickable {
 
     public Timeline(String source) {
         sourceFile = source;
+        println("sourcefile set to " + sourceFile);
         readEvents(source);
     }
     
@@ -75,7 +76,7 @@ public class Timeline implements Tickable {
            case "wait":
            case "pause":
                e.eventType = "wait";
-               e.data.put("time", new Integer(Integer.parseInt(split[1]) * 1000));
+               e.data.put("time", new Integer(Integer.parseInt(split[1])));
                break;
            case "end":
            case "finish":
@@ -89,7 +90,7 @@ public class Timeline implements Tickable {
     }
     
     boolean processEvent(Event e, int time){
-        println(e.eventType);
+        //println(e.eventType);
         switch(e.eventType){
             case "wait":
                 waitUntil = time + ((Integer) e.data.get("time")).intValue();
@@ -100,6 +101,7 @@ public class Timeline implements Tickable {
                 break;
             case "bullet":
                 ((Bullet) templates.get("bullet " + (String) e.data.get("type"))).spawn(e);
+                //println("This code is the timeline bullet spawn");
                 break;
             case "enemy":
                 ((Enemy) templates.get("enemy  " + (String) e.data.get("type"))).spawn(e);

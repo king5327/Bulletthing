@@ -5,8 +5,9 @@ public class Burst extends Timeline implements Templateable {
     
     private Burst(Event e){
     
-    x = e.data.containsKey("x") ? Integer.parseInt((String)e.data.get("x")) : 0;
-    y = e.data.containsKey("y") ? Integer.parseInt((String)e.data.get("y")) : 0;
+    x = e.data.containsKey("x") ? Float.parseFloat((String)e.data.get("x")) : 0;
+    y = e.data.containsKey("y") ? Float.parseFloat((String)e.data.get("y")) : 0;
+    println("spawned burst with " + x + " " + y);    
         
     }//For actual spawning;
     
@@ -32,9 +33,11 @@ public class Burst extends Timeline implements Templateable {
     
     Burst spawn(Timeline.Event e){
         Burst b = new Burst(e);
-        b.sourceFile = sourceFile;
+        b.sourceFile = this.sourceFile;
         b.nextEvent = nextEvent;
         manager.bursts.add(b);
+        b.startTime = manager.currentTime;
+        println("New burst " + b.sourceFile + " spawned by " + sourceFile);
         return b;
     }
     
@@ -45,6 +48,33 @@ public class Burst extends Timeline implements Templateable {
         b.y += t.y;
         
         return b;
+    }
+    
+    @Override
+    public boolean processEvent(Event e, int time){
+        //println(e.eventType);
+        switch(e.eventType){
+            case "wait":
+                waitUntil = time + ((Integer) e.data.get("time")).intValue();
+                waiting = true;
+                break;
+            case "burst":
+                ((Burst) templates.get("burst " + (String) e.data.get("type"))).spawn(e, this);
+                break;
+            case "bullet":
+                ((Bullet) templates.get("bullet " + (String) e.data.get("type"))).spawn(e, this);
+                //println("This code is the timeline bullet spawn");
+                break;
+            case "enemy":
+                ((Enemy) templates.get("enemy " + (String) e.data.get("type"))).spawn(e, this);
+                break;
+            case "end":
+                over = true;
+                break;
+            default:
+                break;
+        }
+        return true;
     }
 
     boolean tick(int time){

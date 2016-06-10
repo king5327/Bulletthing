@@ -4,4 +4,10 @@ bullet plopout xs 2 ys 1
 bullet plopout xs -1 ys 2
 bullet plopout xs -2 ys 1
 
+wait 500
+
+bullet asploder xs 0 ys 2 w 10 h 10 r 5 ya 0.01 yf -0.000005
+bullet plopout xs 1 ys 2
+bullet plopout xs -1 ys 2
+
 end

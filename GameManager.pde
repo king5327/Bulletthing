@@ -20,7 +20,7 @@ class GameManager implements Tickable{
     }
 
     boolean tick() { //Good lord I haven't even gotten to the bullets the player spawns. I cry.
-        currentTime = millis();
+        if(!paused) currentTime = millis();
         player.move();
         for (Object obj : timelines.toArray()){
             Timeline line = (Timeline) obj;
@@ -36,8 +36,10 @@ class GameManager implements Tickable{
             if(enemy.tick(currentTime - startTime)){
                 enemy.draw();
                 player.collide(enemy);
-            }else
+            }else{
+                println("enemy deleted");
                 enemies.remove(enemy);
+            }
         }
         for (Object obj : bullets.toArray ()) {
             Bullet bullet = (Bullet) obj;
@@ -45,7 +47,6 @@ class GameManager implements Tickable{
                 bullet.draw();
                 player.collide(bullet);
             } else {
-                println("bullet deleted");
                 bullets.remove(bullet);
             }
         }

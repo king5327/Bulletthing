@@ -2,10 +2,10 @@
 // enemy drophalf %x 25 y -1
 // enemy drophalf %x 75 y -1
 
-wait 2
+wait 2000
 
-burst radial x 200 y 25
+burst radiasplode x 200 y 50
 
-wait 2
+wait 2000
 
 end
