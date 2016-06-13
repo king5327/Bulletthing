@@ -2,10 +2,10 @@ final int SECOND = 1000, MINUTE = 60 * SECOND;
 
 public class Timeline implements Tickable {
     String sourceFile;
-    int startTime;
+    int startTime = -1;
     Event nextEvent = new Event("null");
     boolean over = false;
-    int lastTime;
+    int currentTime;
     
     boolean waiting;
     float waitUntil;
@@ -116,18 +116,19 @@ public class Timeline implements Tickable {
     }
 
     boolean tick(int m) {
-        if(startTime == 0 || over == true){
+        currentTime += m;
+        if(startTime == -1 || over == true){
             return false;
         }else{
             if(waiting){
-                if(m > waitUntil){
+                if(currentTime > waitUntil){
                     waiting = false;
                 }
                 else{
                     return true;
                 }
             }
-            if(processEvent(nextEvent, m)){
+            if(processEvent(nextEvent, currentTime)){
                 nextEvent = nextEvent.next;
             }
             return true;

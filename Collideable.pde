@@ -6,5 +6,7 @@ interface Collideable extends Drawable{
     float setY(float newY);
     float getRadius();
     void collided();
+    boolean getGrazed();
+    void graze();
     
 }

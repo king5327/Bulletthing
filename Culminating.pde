@@ -1,24 +1,28 @@
-int gameState = 0; //MENU, PREGAME, GAME, PAUSE
+int gameState = 0; //MENU, PREGAME, GAME, PAUSE, BADEND, GOODEND
 GameManager manager = new GameManager();
 Menu menu = new Menu();
 Player player;
 HashMap templates = new HashMap(); //This would normally go inside Timeline, but can't make static fields because of processing.
 Window window;
+PauseMenu pause;
+int tickTime;
+EndMenu endmenu = new EndMenu();
 
-int up_key = 0, down_key = 0, left_key = 0, right_key = 0, shift_key = 0, z_key = 0, x_key = 0, esc_key;
+int up_key = 0, down_key = 0, left_key = 0, right_key = 0, shift_key = 0, z_key = 0, x_key = 0, esc_key = 0;
 int left = 25, right = 375, top = 25, bottom = 575;
 
 void setup() {
-    size(500, 600);
+    size(600, 600);
     gameState = 0;
-    manager.timelines.add(new Timeline("core-main"));
     window = new Window(left, right, top, bottom);
     frameRate(60);
-    player = new Player(left, right, top, bottom);
+    player = new Player();
+    pause = new PauseMenu();
 }
 
 int phase, stage; 
 void draw() {
+    tickTime = millis();
     //Cleanup, then pick stage, then run as it will.
     switch(gameState){
         case 0:
@@ -26,8 +30,9 @@ void draw() {
             menu.draw();
             break;
         case 1:
+            window.reset();
             if(manager.start()){
-                print("Started");
+                println("Started");
                 gameState = 2;
             }else{
                 gameState = 0;
@@ -45,6 +50,12 @@ void draw() {
             manager.pause();
             manager.tick();
             window.draw();
+            pause.draw();
+            break;
+        case 4:
+        case 5:
+            background(0);
+            endmenu.draw();
             break;
         default:
             break;
@@ -87,6 +98,7 @@ void keyPressed() { //Handle keypresses.
             println("x hit");
             break;
         case ESC:
+            println("esc hit");
             esc_key = esc_key == 0 ? 1 : esc_key;
             key = 0;
             break;

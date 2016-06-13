@@ -1,7 +1,7 @@
 class Menu{
     int subMenu = 0;//0 = main, 1 = howto
     boolean position = false;//0 = play, 1 = howto
-    int rectX = 250;
+    int rectX = width/2 - 50;
     int rectY = 300;
     
     void draw(){
@@ -14,6 +14,10 @@ class Menu{
                 reset();
             }
             z_key++;
+        }
+        if(esc_key == 1){
+            esc_key++;
+            exit();
         }
         switch(subMenu){
             case 0:
@@ -34,23 +38,24 @@ class Menu{
         //Move that blasted rectangle
         int targetloc = position ? 350 : 300;
         rectY = (int)((rectY + targetloc) / 2 + 3 >= 350 && (rectY + targetloc) / 2 - 3 <= targetloc ? targetloc : (rectY + targetloc) / 2);
+        rectX = width/2;
         
         //Draw stuff
         strokeWeight(0);
         textAlign(CENTER, CENTER);
         textSize(30);
         fill(255);
-        text("Custom Bullet Hell v1",250, 200);
+        text("Custom Bullet Hell v1",width/2, 200);
         fill(60, 140, 200);
         rectMode(CENTER);
         rect(rectX, rectY, 100, 50);
         fill(255);
         textSize(20);
-        text("Play!", 250, 300);
+        text("Play!", width/2, 300);
         textSize(15);
-        text("How to?", 250, 350);
+        text("How to?", width/2, 350);
         textAlign(LEFT, BOTTOM);
-        text("Z to select", 10, 590);
+        text("Z to select", 10, height-10);
     }
     
     void drawHowTo(){
