@@ -130,6 +130,7 @@ public class Timeline implements Tickable {
             }
             if(processEvent(nextEvent, currentTime)){
                 nextEvent = nextEvent.next;
+                if(nextEvent == null) over = true; //Catch files which didn't end their scripts properly.
             }
             return true;
         }

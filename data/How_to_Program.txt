@@ -1,0 +1,154 @@
+You want to get into scripting your own level?
+Read this first.
+
+The scripting is divided into three parts: timelines, bursts and bullets
+
+The timeline, which is in timeline/main.txt, is responsible for the general mix of bursts and bullets that come on screen.
+
+The line (snippet 1)
+burst myburst x 200 y 50
+will make a burst from burst/myburst.txt run at the x coordinate 200 and the y coordinate 50
+
+For reference, the left edge of the play field is x 25, and the right is x 375. The top is y 25, while the bottom is y 575.
+
+A burst is like a mini-timeline, but it also has a location. If you spawn a burst in five places, the bullets will come our relative to it.
+
+If you put this line (snippet 2)
+bullet mybullet ys 2.5
+into a timeline, it would spawn offscreen, in the top right corner of the whole game, and immediately be deleted.
+
+However, if that line was in myburst and you ran snippet 1, the bullet will spawn at x 200 y 50 too.
+
+Here's where things get interesting. A bullet is a burst itself, but it can move and it will kill the player.
+
+So if you gave mybullet this snippet (snippet 3)
+wait 1000
+bullet mybullettoo ys 2 x 5
+bullet mybullettoo ys 2 y 5
+mybullet would spawn a mybullettoo 5 pixels to its left and another 5 pixels to its right,
+but at whatever y value it was at itself, both moving down at a speed of 2 units per second (20 pixels/second).
+
+I haven't mentioned how the spawning works in too much detail yet. When you spawn something, you give it its type, then its name.
+Finally you give it its variables, in key-value pairs.
+
+As such, the line (snippet 4)
+bullet complexmovebullet xs 3 ys 2 xa -0.5 ya 0 xf 0.001
+would become grouped as
+(bullet) (complexmovebullet) (xs 3) (ys 2) (xa -0.5) (ya 0) (xf 0.001)
+At the bottom of this page is a reference for all the variables you can use when spawning something.
+
+That's it for spawning, now it's time briefly focus on speeds.
+First thing's first, any bullet whose script is over and which has completely stopped in the middle of the screen will be removed;
+Secondly, any bullet which falls offscreen will also be removed.
+That being said, you can set a bullet's speed when you call it by using the xs and ys parameters.
+
+For example, snippet 4 from above shows a bullet which moves down at two units per second, and to the right at five.
+The other parameters will be left for the reference guide.
+
+Finally, this line (snippet 5)
+change xs 0 ys -1
+only applies to bullets, but it lets you change its movement on the fly.
+In this case, it would set the speed to 1 unit per second upward (10 pixels/second).
+On bursts, you can only use the x and y values.
+It's not recommended to unless the start point of the burst isn't relevant.
+
+At this point, we've covered how to spawn bursts (which can be spawned multiple times in multiple places).
+We've also covered how to use bursts to spawn bullets instead of manually copypasting them in the main timeline.
+Additionally, we've covered how to use bullets to spawn more bullets, if you're interested in making pretty patterns with them.
+Finally, we've covered how to change bullets on the fly.
+
+One last thing, it's recommended to add a single line (snippet 6)
+end
+at the end of any code lines. This just makes it easy to cut out of the game at any point you want.
+
+=== End of Tutorial ===
+
+=== Command Reference ===
+Text in () denotes a one-word input.
+Text in [] denotes repeatable input.
+Text in <> is a description of the command on the same line.
+
+-- All --
+// <Any text after, this is a comment>
+burst (burst type) [variables] <spawns a burst with the variables>
+bullet (bullet type) [variables] <spawns a bullet with the variables>
+wait (milliseconds to wait) <waits that many milliseconds>
+end <prevents code after it from executing>
+
+-- Bullet Only --
+kill <removes the bullet once the rest of its code completes>
+change [variables] <lets you change a bullet's variables from within>
+
+=== Variable Reference ===
+
+-- Burst and Bullet --
+x and y:
+Default to zero. They declare the offset from the burst that spawns it.
+If a timeline is spawning a burst or bullet, its position is treated as 0,0.
+
+-- Bullet Only --
+xs and ys:
+Also default to zero.
+Every second the position of the bullet changes by this amount on its given axis.
+
+
+xa and ya:
+These are acceleration parameters which initialize to 0.
+The xs and ys values change by this amount every second on their given axis. Great for bullets which speed up.
+
+xf and yf:
+Force values. They initialize to 0.
+The xf and yf values change the xs and ys values respectively.
+If you want a bullet that speeds up, slows down, and then turns around, use this.
+
+r:
+This is the hit radius of the bullet in pixels. It doesn't actually change its appearance though.
+The default is 2.5
+
+w and h:
+These define the visible width and height of the bullets in pixels. Default 5.
+Try to avoid setting r smaller than the lesser of the two of these or larger than the greater - those would be unfair bullets.
+
+sw:
+This defines the width of the optional outer border of the bullet. Default 0.
+It won't make the bullet bigger than the w and h variables, but rather bite into the bullet's current area.
+
+cr, cg, cb and ca:
+These define the red, green, blue and alpha values for the center color.
+180, 30, 255, 180 are the defaults, in that order.
+
+rr, rg, rb and ra:
+If you enable the outer border with sw, these define color for it, as above.
+0, 0, 0, 150 are the defaults, respectively.
+
+osd:
+This is a weird one. Basically, it prevents a bullet from being despawned if it goes off screen,
+unless it hits an end or kill flag, or the end of its own file.
+Default: true
+Note: setting its value in a variables list to anything other than false (case-insensitive)
+automatically turns it to true.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

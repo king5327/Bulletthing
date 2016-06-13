@@ -26,7 +26,7 @@ class EndMenu{
         text("Game Over",width/2, 200);
         text("You have been slain by the Bullets", width/2, 300);
         textSize(15);
-        text("You survived " + (manager.currentTime - manager.startTime)/1000f + "s", width/2, 350);
+        text("You survived " + (manager.currentTime - manager.startTime)/1000f + "s\nYour score: " + window.score, width/2, 350);
         textAlign(LEFT, BOTTOM);
         text("Z to return to the menu", 10, height-10);
     }

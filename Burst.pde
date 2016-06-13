@@ -5,11 +5,15 @@ public class Burst extends Timeline implements Templateable {
     
     private Burst(Event e){
     
-    x = e.data.containsKey("x") ? Float.parseFloat((String)e.data.get("x")) : 0;
-    y = e.data.containsKey("y") ? Float.parseFloat((String)e.data.get("y")) : 0;
-    println("spawned burst with " + x + " " + y);    
+        readData(e);
+        println("spawned burst with " + x + " " + y);    
         
     }//For actual spawning;
+    
+    private void readData(Event e){
+        x = e.data.containsKey("x") ? Float.parseFloat((String)e.data.get("x")) : 0;
+        y = e.data.containsKey("y") ? Float.parseFloat((String)e.data.get("y")) : 0;
+    }
     
     public Burst(String source){
         super(source);

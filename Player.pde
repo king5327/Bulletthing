@@ -59,7 +59,7 @@ class Player implements Drawable, Collideable{
             fill(255, 255, 255, 200);
             ellipseMode(RADIUS);
             strokeWeight(0);
-            ellipse(x, y, grazeRadius, grazeRadius);
+            //ellipse(x, y, grazeRadius, grazeRadius);
             if(shift_key > 0){
                 fill(0);
             }else{
@@ -67,6 +67,16 @@ class Player implements Drawable, Collideable{
             }
             noStroke();
             ellipse(x, y, hitRadius, hitRadius);
+        }
+    }
+    
+    void drawUnder(){
+        if(alive){
+            stroke(127, 127, 127, 100);
+            fill(255, 255, 255, 200);
+            ellipseMode(RADIUS);
+            strokeWeight(0);
+            ellipse(x, y, grazeRadius, grazeRadius);
         }
     }
     

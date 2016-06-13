@@ -12,6 +12,7 @@ class GameManager implements Tickable{
         reset();
         startTime = tickTime;
         currentTime = tickTime;
+        paused = false;
         player.reset();
         //placeholder since I'm not going to bother with more than one line for now.
         this.timelines.add(new Timeline("core-main"));
@@ -40,6 +41,7 @@ class GameManager implements Tickable{
         //println(currentTime - lastTime);
         
         player.move();
+        player.drawUnder();
         for (Object obj : timelines.toArray()){ //Tick each of the four types of line (enemies not implemented yet). Remove them if their tick doesn't succeed (false result).
             Timeline line = (Timeline) obj;
             if(! line.tick(currentTime - lastTime)){
@@ -110,5 +112,6 @@ class GameManager implements Tickable{
         bursts.clear();
         enemies.clear();
         bullets.clear();
+        paused = false;
     }
 }
