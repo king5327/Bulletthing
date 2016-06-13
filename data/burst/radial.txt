@@ -1,0 +1,7 @@
+bullet plopout xs 0 ys 3
+bullet plopout xs 1 ys 2
+bullet plopout xs 2 ys 1
+bullet plopout xs -1 ys 2
+bullet plopout xs -2 ys 1
+
+end

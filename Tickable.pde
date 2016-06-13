@@ -1,3 +1,4 @@
 interface Tickable {
-    boolean tick(float time);
+    boolean tick(int time);
+    void interrupt();
 }
