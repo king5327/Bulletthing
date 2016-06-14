@@ -1,0 +1,15 @@
+change w 15 h 15 r 7.5 cr 0 cg 0 cb 255 ca 255
+wait 2000
+
+bullet 2radial xs 1.41421356237 ys 2.41421356237
+bullet 2radial xs -1.41421356237 ys 2.41421356237
+bullet 2radial xs 1.41421356237 ys -0.41421356237
+bullet 2radial xs -1.41421356237 ys -0.41421356237
+bullet 2radial xs 0 ys -1
+bullet 2radial xs 0 ys 3
+bullet 2radial xs -2 ys 1
+bullet 2radial xs 2 ys 1
+
+kill
+
+end

@@ -6,13 +6,13 @@ public class Burst extends Timeline implements Templateable {
     private Burst(Event e){
     
         readData(e);
-        println("spawned burst with " + x + " " + y);    
+        //println("spawned burst with " + x + " " + y);    
         
     }//For actual spawning;
     
     private void readData(Event e){
-        x = e.data.containsKey("x") ? Float.parseFloat((String)e.data.get("x")) : 0;
-        y = e.data.containsKey("y") ? Float.parseFloat((String)e.data.get("y")) : 0;
+        if(e.data.containsKey("x")) x = Float.parseFloat((String)e.data.get("x"));
+        if(e.data.containsKey("y")) y = Float.parseFloat((String)e.data.get("y"));
     }
     
     public Burst(String source){
@@ -41,7 +41,7 @@ public class Burst extends Timeline implements Templateable {
         b.nextEvent = nextEvent;
         manager.bursts.add(b);
         b.startTime = manager.currentTime;
-        println("New burst " + b.sourceFile + " spawned by " + sourceFile);
+        //println("New burst " + b.sourceFile + " spawned by " + sourceFile);
         return b;
     }
     

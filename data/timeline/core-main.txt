@@ -1,11 +1,48 @@
-// enemy drophalf %x 50 y -1
-// enemy drophalf %x 25 y -1
-// enemy drophalf %x 75 y -1
-
 wait 2000
 
 burst radiasplode x 200 y 50
 
-wait 2000
+wait 1000
+
+bullet 4radial x 100 y 100 ya 0.25 yf -0.002
+
+wait 5000
+
+bullet 4radial x 300 y 100 ya 0.20 yf -0.002
+
+wait 10000
+
+burst lefthazepulsar x 350 y 50
+
+wait 20000
+
+bullet 5radial x 200 y 100
+
+wait 12000
+
+bullet 4radial x 125 y 150
+
+bullet 4radial x 275 y 150
+
+wait 20000
+
+burst radiasplode x 200 y 50
+burst radiasplode x 250 y 50
+burst radiasplode x 300 y 50
+burst radiasplode x 150 y 50
+burst radiasplode x 100 y 50
+
+wait 500
+
+bullet 3radial x 200 y 100
+
+wait 10000
+
+burst righthazepulsar x 50 y 50
+burst lefthazepulsar x 350 y 50
+
+wait 5000
+
+bullet nozenthal x 200 y 100
 
 end

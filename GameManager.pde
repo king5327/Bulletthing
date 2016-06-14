@@ -40,7 +40,7 @@ class GameManager implements Tickable{
         }
         //println(currentTime - lastTime);
         
-        player.move();
+        player.move(currentTime - lastTime);
         player.drawUnder();
         for (Object obj : timelines.toArray()){ //Tick each of the four types of line (enemies not implemented yet). Remove them if their tick doesn't succeed (false result).
             Timeline line = (Timeline) obj;

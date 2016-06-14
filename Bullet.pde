@@ -15,39 +15,40 @@ public class Bullet extends Burst implements Drawable, Collideable {
     private Bullet(Event e){
     super(e);
     readData(e);
-    println("spawned bullet with " + xspeed + " " + yspeed);
-    center = color(cr, cg, cb, ca); ring = color(rr, rg, rb, ra);
+    //println("spawned bullet with " + xspeed + " " + yspeed);
     }//For actual spawning;
     
     private void readData(Event e){ //Lots of variables to have read from the file.
-    xspeed = e.data.containsKey("xs") ? Float.parseFloat((String)e.data.get("xs"))       : xspeed;
-    yspeed = e.data.containsKey("ys") ? Float.parseFloat((String)e.data.get("ys"))       : yspeed;
-    xaccel = e.data.containsKey("xa") ? Float.parseFloat((String)e.data.get("xa"))       : xaccel;
-    yaccel = e.data.containsKey("ya") ? Float.parseFloat((String)e.data.get("ya"))       : yaccel;
-    xforce = e.data.containsKey("xf") ? Float.parseFloat((String)e.data.get("xf"))       : xforce;
-    yforce = e.data.containsKey("yf") ? Float.parseFloat((String)e.data.get("yf"))       : yforce;
-    radius = e.data.containsKey("r")  ? Float.parseFloat((String)e.data.get("r"))        : radius;
     
-    wid = e.data.containsKey("w")     ? (int) Float.parseFloat((String)e.data.get("w"))  : wid;
-    hei = e.data.containsKey("h")     ? (int) Float.parseFloat((String)e.data.get("h"))  : hei;
-    wegt = e.data.containsKey("sw")   ? (int) Float.parseFloat((String)e.data.get("sw")) : wegt;
+    super.readData(e);
     
-    cr = e.data.containsKey("cr")     ? (int) Float.parseFloat((String)e.data.get("cr")) : cr; //Color changing
-    cg = e.data.containsKey("cg")     ? (int) Float.parseFloat((String)e.data.get("cg")) : cg;
-    cb = e.data.containsKey("cb")     ? (int) Float.parseFloat((String)e.data.get("cb")) : cb;
-    ca = e.data.containsKey("ca")     ? (int) Float.parseFloat((String)e.data.get("ca")) : ca;
+    if(e.data.containsKey("xs")) xspeed = Float.parseFloat((String)e.data.get("xs"));
+    if(e.data.containsKey("ys")) yspeed = Float.parseFloat((String)e.data.get("ys"));
+    if(e.data.containsKey("xa")) xaccel = Float.parseFloat((String)e.data.get("xa"));
+    if(e.data.containsKey("ya")) yaccel = Float.parseFloat((String)e.data.get("ya"));
+    if(e.data.containsKey("xf")) xforce = Float.parseFloat((String)e.data.get("xf"));
+    if(e.data.containsKey("yf")) yforce = Float.parseFloat((String)e.data.get("yf"));
+    if(e.data.containsKey("r"))  radius = Float.parseFloat((String)e.data.get("r"));
     
-    rr = e.data.containsKey("rr")     ? (int) Float.parseFloat((String)e.data.get("rr")) : rr;
-    rg = e.data.containsKey("rg")     ? (int) Float.parseFloat((String)e.data.get("rg")) : rb;
-    rb = e.data.containsKey("rb")     ? (int) Float.parseFloat((String)e.data.get("rb")) : rg;
-    ra = e.data.containsKey("ra")     ? (int) Float.parseFloat((String)e.data.get("ra")) : ra;
+    if(e.data.containsKey("w"))     wid = (int) Float.parseFloat((String)e.data.get("w"));
+    if(e.data.containsKey("h"))     hei = (int) Float.parseFloat((String)e.data.get("h"));
+    if(e.data.containsKey("sw"))   wegt = (int) Float.parseFloat((String)e.data.get("sw"));
     
-    destroyOnEscape = e.data.containsKey("osd") ? !"false".equalsIgnoreCase((String)e.data.get("osd")) : destroyOnEscape;
+    if(e.data.containsKey("cr"))     cr = (int) Float.parseFloat((String)e.data.get("cr")); //Color changing
+    if(e.data.containsKey("cg"))     cg = (int) Float.parseFloat((String)e.data.get("cg"));
+    if(e.data.containsKey("cb"))     cb = (int) Float.parseFloat((String)e.data.get("cb"));
+    if(e.data.containsKey("ca"))     ca = (int) Float.parseFloat((String)e.data.get("ca"));
+    
+    if(e.data.containsKey("rr"))     rr = (int) Float.parseFloat((String)e.data.get("rr"));
+    if(e.data.containsKey("rg"))     rg = (int) Float.parseFloat((String)e.data.get("rg"));
+    if(e.data.containsKey("rb"))     rb = (int) Float.parseFloat((String)e.data.get("rb"));
+    if(e.data.containsKey("ra"))     ra = (int) Float.parseFloat((String)e.data.get("ra"));
+    
+    if(e.data.containsKey("osd")) destroyOnEscape = "false".equalsIgnoreCase((String)e.data.get("osd"));
     
     center = color(cr, cg, cb, ca);
     ring = color(rr, rg, rb, ra);
-    
-    super.readData(e);
+    //println("changed states");
     
     }
     
@@ -139,6 +140,7 @@ public class Bullet extends Burst implements Drawable, Collideable {
                 break;
             case "change":
                 readData(e);
+                break;
             default:
                 super.processEvent(e, time);
                 break;

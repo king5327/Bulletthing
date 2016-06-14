@@ -8,6 +8,11 @@ class EndMenu{
             gameState = 0;
             manager.reset();
         }
+        if(esc_key == 1){
+            esc_key++;
+            gameState = 0;
+            manager.reset();
+        }
         if(gameState == 4){
             drawFail();
         }else if(gameState == 5){

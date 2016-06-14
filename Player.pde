@@ -1,8 +1,8 @@
 class Player implements Drawable, Collideable{
     
     float x = width/2, y = height/2;
-    int grazeRadius = 15, hitRadius = 2;
-    float speed = 2, focusSpeed = 0.5;
+    int grazeRadius = 15, hitRadius = 1;
+    float speed = 3, focusSpeed = 0.5;
     boolean alive = true;
     
     public Player(){
@@ -12,12 +12,13 @@ class Player implements Drawable, Collideable{
     public boolean collide(Collideable other){ //This is more important than the other ones since it handles both the hit and graze for Player.
         if(!alive) return false;
         float distances = sqrt((pow(this.x - other.getX(), 2) + pow(this.y - other.getY(), 2)));
-        if(hitRadius + other.getRadius() >= distances){
+        if(hitRadius + other.getRadius() > distances){
+            delay(500);
             other.collided();
             collided();
             manager.notifyDead();
             return true;
-        }else if(grazeRadius + other.getRadius() >= distances && other.getGrazed() == false){
+        }else if(grazeRadius + other.getRadius() > distances && other.getGrazed() == false){
             other.graze();
             this.graze();
             return true;
@@ -25,7 +26,7 @@ class Player implements Drawable, Collideable{
         return false;
     }
     
-    void move(){
+    void move(int m){
         if(!manager.paused){
             float v_mode = 0, h_mode = 0;
             if(up_key > 0){
@@ -40,8 +41,8 @@ class Player implements Drawable, Collideable{
             if(right_key > 0){
                 h_mode += shift_key == 0 ? speed : focusSpeed;
             }
-            x += h_mode * 60 / frameRate;
-            y -= v_mode * 60 / frameRate;
+            x += h_mode * m / 30;
+            y -= v_mode * m / 30;
             if(x + hitRadius > right)
                 x = right - hitRadius;
             else if(x - hitRadius < left)
@@ -63,7 +64,7 @@ class Player implements Drawable, Collideable{
             if(shift_key > 0){
                 fill(0);
             }else{
-                fill(0,0,0,15);
+                fill(0,0,0,30);
             }
             noStroke();
             ellipse(x, y, hitRadius, hitRadius);
@@ -88,7 +89,8 @@ class Player implements Drawable, Collideable{
     
     
     public void collided(){
-        println("Dead, jim!");
+        //println("Dead, jim!");
+        z_key = z_key == 1 ? 2 : z_key;
         alive = false;
         manager.notifyDead();
     }
@@ -103,7 +105,7 @@ class Player implements Drawable, Collideable{
     }
     
     public void graze(){
-        println("Grazed, jim.");
+        //println("Grazed, jim.");
         window.score++;
     }
     
