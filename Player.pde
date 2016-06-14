@@ -10,6 +10,7 @@ class Player implements Drawable, Collideable{
     }
     
     public boolean collide(Collideable other){ //This is more important than the other ones since it handles both the hit and graze for Player.
+        //Handles both graze and hit collisions. In theory, the bullet collide should not be called with this, as it only handles hit.
         if(!alive) return false;
         float distances = sqrt((pow(this.x - other.getX(), 2) + pow(this.y - other.getY(), 2)));
         if(hitRadius + other.getRadius() > distances){

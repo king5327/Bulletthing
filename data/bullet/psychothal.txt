@@ -1,0 +1,9 @@
+change cr 255 cb 50 cg 50 ca 150 r 10 w 24 h 24 sw 2 sr 255 sb 200 sg 255 sa 75
+
+wait 2000
+
+bullet nozenthal
+bullet 4radial xs 3 ys 1
+bullet 4radial xs -3 ys 1
+
+kill

@@ -1,5 +1,5 @@
 change w 10 h 10 r 5 cr 160 cg 40 cb 200 ca 255
-wait 1800
+wait 3000
 
 bullet 1radial xs 1.41421356237 ys 2.41421356237
 bullet 1radial xs -1.41421356237 ys 2.41421356237

@@ -6,7 +6,7 @@ public class Bullet extends Burst implements Drawable, Collideable {
     float radius = 2.5;
     float xspeed = 0, yspeed = 0, xaccel = 0, yaccel = 0, xforce = 0, yforce = 0;
     int wid = 5, hei = 5, wegt = 0; //Width, Height, Stroke Weight
-    int cr = 180, cg = 30, cb = 255, ca = 180;
+    int cr = 180, cg = 70, cb = 255, ca = 150;
     int rr = 0, rg = 0, rb = 0, ra = 150;
     color center = color(cr, cg, cb, ca), ring = color(rr, rg, rb, ra);
     public boolean grazed = false;
@@ -18,7 +18,9 @@ public class Bullet extends Burst implements Drawable, Collideable {
     //println("spawned bullet with " + xspeed + " " + yspeed);
     }//For actual spawning;
     
+    @Override
     private void readData(Event e){ //Lots of variables to have read from the file.
+    //Done to be as efficient as possible, but the checks still all happen on spawn and change.
     
     super.readData(e);
     
@@ -56,7 +58,8 @@ public class Bullet extends Burst implements Drawable, Collideable {
         super(source);
     }
     
-    Bullet spawn(Timeline.Event e){
+    @Override
+    public Bullet spawn(Timeline.Event e){
         Bullet b = new Bullet(e);
         b.sourceFile = sourceFile;
         b.nextEvent = nextEvent;

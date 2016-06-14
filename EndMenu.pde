@@ -1,6 +1,6 @@
 class EndMenu{
     
-    //Um... an exit button and a resume button, I guess.
+    //Um... a message and an exit button. That's all this does.
     
     void draw(){
         if(z_key == 1){

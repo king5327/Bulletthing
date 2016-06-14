@@ -1,0 +1,19 @@
+change cr 200 cg 200 cb 50 ca 100 r 5 w 12 h 12 sw 1 sr 50 sg 255 sb 50 sa 200
+
+wait 2000
+
+change ys 3 xs 0
+
+wait 4000
+
+burst radial
+
+wait 1000
+
+burst radial
+
+wait 1000
+
+bullet 3radial ys 2 xs 0
+
+kill

@@ -26,7 +26,7 @@ public class Timeline implements Tickable {
         println("data/timeline/" + source + ".txt");
     }
     
-    void translateEvents(String[] lines){
+    void translateEvents(String[] lines){ //Line by line, add to the chain of events.
         Event position = nextEvent;
         for(String line:lines){
             line = line.trim();
@@ -43,6 +43,7 @@ public class Timeline implements Tickable {
     Event translateEvent(String line){
         //Then, process the lines into events
         //Always call the superclass's  translateEvent to ensure you don't lose any methods from above, unless it's this top class.
+        //Yes, I know some events return null Events (not null pointers of type Event). Luckily, this is built to handle that.
        String[] split = line.split(" ");
        Event e = new Event();
            switch(split[0]){
@@ -90,6 +91,8 @@ public class Timeline implements Tickable {
     }
     
     boolean processEvent(Event e, int time){
+        //Handles events as they come up in the actual execution of the timeline. The timeline-only process just spawns and waits.
+        
         //println(e.eventType);
         switch(e.eventType){
             case "wait":
@@ -116,21 +119,24 @@ public class Timeline implements Tickable {
     }
 
     boolean tick(int m) {
+        //Takes the interval between the current time and the last tick, as provided either from the gamemanager or its subclasses, and ticks itself.
         currentTime += m;
         if(startTime == -1 || over == true){
             return false;
         }else{
-            if(waiting){
-                if(currentTime > waitUntil){
-                    waiting = false;
+            while(over == false){
+                if(waiting){
+                    if(currentTime > waitUntil){
+                        waiting = false;
+                    }
+                    else{
+                        return true;
+                    }
                 }
-                else{
-                    return true;
+                if(processEvent(nextEvent, currentTime)){
+                    nextEvent = nextEvent.next;
+                    if(nextEvent == null) over = true; //Catch files which didn't end their scripts properly.
                 }
-            }
-            if(processEvent(nextEvent, currentTime)){
-                nextEvent = nextEvent.next;
-                if(nextEvent == null) over = true; //Catch files which didn't end their scripts properly.
             }
             return true;
         }

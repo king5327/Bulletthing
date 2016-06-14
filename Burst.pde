@@ -11,6 +11,8 @@ public class Burst extends Timeline implements Templateable {
     }//For actual spawning;
     
     private void readData(Event e){
+        
+        //Whether it's from the original spawn or some change (accessible only to bullets and below), this burst's x and y variables are set.
         if(e.data.containsKey("x")) x = Float.parseFloat((String)e.data.get("x"));
         if(e.data.containsKey("y")) y = Float.parseFloat((String)e.data.get("y"));
     }
@@ -35,7 +37,8 @@ public class Burst extends Timeline implements Templateable {
        }
     }
     
-    Burst spawn(Timeline.Event e){
+    @Override
+    public Burst spawn(Timeline.Event e){
         Burst b = new Burst(e);
         b.sourceFile = this.sourceFile;
         b.nextEvent = nextEvent;
@@ -45,7 +48,8 @@ public class Burst extends Timeline implements Templateable {
         return b;
     }
     
-    Burst spawn(Timeline.Event e, Burst t){
+    @Override
+    public Burst spawn(Timeline.Event e, Burst t){
         Burst b = spawn(e);
         
         b.x += t.x;

@@ -39,10 +39,21 @@ bullet 3radial x 200 y 100
 wait 10000
 
 burst righthazepulsar x 50 y 50
+
+wait 500
+
 burst lefthazepulsar x 350 y 50
 
-wait 5000
+wait 4500
 
 bullet nozenthal x 200 y 100
+
+wait 10000
+
+bullet psychothal ys 1 x 200 y 100
+
+wait 15000
+
+burst nukeburst ys 1 x 200 y 75
 
 end
