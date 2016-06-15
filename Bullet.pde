@@ -58,7 +58,7 @@ public class Bullet extends Burst implements Drawable, Collideable {
     }
     
     @Override
-    public Bullet spawn(Timeline.Event e){
+    public Bullet spawn(Timeline.Event e){ //Takes an event, reads it, and instantiates a moving bullet onscreen.
         Bullet b = new Bullet(e);
         b.sourceFile = sourceFile;
         b.nextEvent = nextEvent;
@@ -82,7 +82,7 @@ public class Bullet extends Burst implements Drawable, Collideable {
         println("data/bullet/" + source + ".txt");
     }
     
-    boolean tick(int time){
+    boolean tick(int time){ //Takes an interval and moves the bullet.
         
         //DoStuff
         x += xspeed * time/100;

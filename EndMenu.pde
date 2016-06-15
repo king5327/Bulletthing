@@ -39,7 +39,7 @@ class EndMenu{
         textAlign(LEFT, BOTTOM);
         text("Z to return to the menu", 10, height-10);
         
-        textSize(15);
+        textSize(12);
         textAlign(RIGHT, BOTTOM);
         text(lastScores, width - 10, height - 10);
     }
@@ -59,7 +59,7 @@ class EndMenu{
         
     }
     
-    void rescore(){
+    void rescore(){ //Gives EndMenu the notification that the scores are about to be changed and that it should update to them first.
         lastScores = menu.scoreLines;
     }
     

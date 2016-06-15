@@ -76,7 +76,7 @@ class Menu{
             scoreLines += bestWinScore + " - Best Winning Score";
         }
         
-        textSize(15);
+        textSize(12);
         textAlign(RIGHT, BOTTOM);
         text(scoreLines, width - 10, height - 10);
         
@@ -84,7 +84,7 @@ class Menu{
     
     void drawHowTo(){
         fill(255);
-        strokeWeight(0); //Amazing preparation for what is currently absolutely no text.
+        strokeWeight(0);
         textAlign(CENTER, CENTER);
         text("How to Play:\nSurvive the waves of bullets without getting hit.\nYou get hit if your small inner circle hits a bullet."+
             "\n\nHow to Score:\nGraze as many bullets as you can.\nYou graze a bullet when it hits your large outer circle."+

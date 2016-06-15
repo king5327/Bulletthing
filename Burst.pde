@@ -17,7 +17,7 @@ public class Burst extends Timeline implements Templateable {
         if(e.data.containsKey("y")) y = Float.parseFloat((String)e.data.get("y"));
     }
     
-    public Burst(String source){
+    public Burst(String source){ //The super's constructor can handle pretty much all events including custom ones in this file.
         super(source);
     }
     
@@ -38,7 +38,7 @@ public class Burst extends Timeline implements Templateable {
     }
     
     @Override
-    public Burst spawn(Timeline.Event e){
+    public Burst spawn(Timeline.Event e){ //Spawns this at a location and starts it running. Use only on the template object.
         Burst b = new Burst(e);
         b.sourceFile = this.sourceFile;
         b.nextEvent = nextEvent;
@@ -58,7 +58,7 @@ public class Burst extends Timeline implements Templateable {
     }
     
     @Override
-    public boolean processEvent(Event e, int time){
+    public boolean processEvent(Event e, int time){ //Handles the same events Timeline would, but uses the overloaded spawner to place the spawned stuff relative to it.
         //println(e.eventType);
         switch(e.eventType){
             case "wait":
@@ -84,7 +84,7 @@ public class Burst extends Timeline implements Templateable {
         return true;
     }
 
-    boolean tick(int time){
+    boolean tick(int time){ //Every tick take the time and with the time tick the burst.
         return super.tick(time);
     }
     

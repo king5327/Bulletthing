@@ -42,7 +42,7 @@ class Player implements Drawable, Collideable{
             if(right_key > 0){
                 h_mode += shift_key == 0 ? speed : focusSpeed;
             }
-            x += h_mode * m / 30;
+            x += h_mode * m / 30; //Makes movement a function of both speed and time. Any lag should then not change the motions too much.
             y -= v_mode * m / 30;
             if(x + hitRadius > right)
                 x = right - hitRadius;
