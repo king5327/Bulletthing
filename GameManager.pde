@@ -78,6 +78,10 @@ class GameManager implements Tickable{
         
         //println(timelines.size());
         if(timelines.size() == 0 && bursts.size() == 0 && enemies.size() == 0 && bullets.size() == 0){
+            endMenu.rescore();
+            if(menu.bestWinScore < window.score)
+                menu.bestWinScore = window.score;
+            menu.won = true;
             gameState = 5;
         }
         
@@ -104,6 +108,22 @@ class GameManager implements Tickable{
     }
     
     void notifyDead(){
+        endMenu.rescore();
+        
+        if((manager.currentTime - manager.startTime)/1000f > menu.bestTime){
+            if(((manager.currentTime - manager.startTime)/1000f == menu.bestTime && (window.score > menu.bestTimeScore))  || (manager.currentTime - manager.startTime)/1000f > menu.bestTime)
+                menu.bestTimeScore = window.score;
+            menu.bestTime = (manager.currentTime - manager.startTime)/1000f;
+        }
+        
+        if(window.score > menu.bestScore){
+            if(((window.score == menu.bestScore) && (manager.currentTime - manager.startTime)/1000f > menu.bestScoreTime) || (window.score > menu.bestScore))
+                menu.bestScoreTime = (manager.currentTime - manager.startTime)/1000f;
+            menu.bestScore = window.score;
+        }
+        
+        menu.scored = true;
+        
         gameState = 4;
     }
     

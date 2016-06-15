@@ -14,6 +14,8 @@ class Window implements Drawable{
         
         //This makes the overlay for everything else.
         
+        textSize(15);
+        
         fill(200, 60, 140);
         noStroke();
         rectMode(CORNER);

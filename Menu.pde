@@ -3,6 +3,10 @@ class Menu{
     boolean position = false;//0 = play, 1 = howto
     int rectX = width/2 - 50;
     int rectY = 300;
+    boolean won, scored;
+    float bestScoreTime, bestTime;
+    int bestTimeScore, bestScore, bestWinScore;
+    String scoreLines;
     
     void draw(){
         if(z_key == 1){
@@ -56,6 +60,26 @@ class Menu{
         text("How to?", width/2, 350);
         textAlign(LEFT, BOTTOM);
         text("Z to select", 10, height-10);
+        
+        textSize(10);
+        scoreLines = "";
+        if(scored){
+            scoreLines += bestTime + " - Best Non-Winning Time\n";
+            scoreLines += bestTimeScore + " - Best Non-Winning Time's Score\n\n";
+            scoreLines += bestScore + " - Best Non-Winning Score\n";
+            scoreLines += bestScoreTime + " - Best Non-Winning Score's Time";
+        }
+        if(won && scored){
+            scoreLines += "\n>====================<\n";
+        }
+        if(won){
+            scoreLines += bestWinScore + " - Best Winning Score";
+        }
+        
+        textSize(15);
+        textAlign(RIGHT, BOTTOM);
+        text(scoreLines, width - 10, height - 10);
+        
     }
     
     void drawHowTo(){

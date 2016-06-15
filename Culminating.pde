@@ -6,7 +6,7 @@ HashMap templates = new HashMap(); //This would normally go inside Timeline, but
 Window window;
 PauseMenu pause;
 int tickTime;
-EndMenu endmenu = new EndMenu();
+EndMenu endMenu = new EndMenu();
 
 int up_key = 0, down_key = 0, left_key = 0, right_key = 0, shift_key = 0, z_key = 0, x_key = 0, esc_key = 0;
 int left = 25, right = 375, top = 25, bottom = 575;
@@ -55,7 +55,7 @@ void draw() {
         case 4:
         case 5:
             background(0);
-            endmenu.draw();
+            endMenu.draw();
             break;
         default:
             break;

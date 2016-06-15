@@ -2,6 +2,8 @@ class EndMenu{
     
     //Um... a message and an exit button. That's all this does.
     
+    String lastScores;
+    
     void draw(){
         if(z_key == 1){
             z_key++;
@@ -19,6 +21,8 @@ class EndMenu{
             drawPass();
         }
         
+        
+        
     }
     
     void drawFail(){
@@ -34,6 +38,10 @@ class EndMenu{
         text("You survived " + (manager.currentTime - manager.startTime)/1000f + "s\nYour score: " + window.score, width/2, 350);
         textAlign(LEFT, BOTTOM);
         text("Z to return to the menu", 10, height-10);
+        
+        textSize(15);
+        textAlign(RIGHT, BOTTOM);
+        text(lastScores, width - 10, height - 10);
     }
     
     void drawPass(){
@@ -49,6 +57,10 @@ class EndMenu{
         textAlign(LEFT, BOTTOM);
         text("Z to return to the menu", 10, height-10);
         
+    }
+    
+    void rescore(){
+        lastScores = menu.scoreLines;
     }
     
 }
