@@ -48,7 +48,6 @@ public class Burst extends Timeline implements Templateable {
         return b;
     }
     
-    @Override
     public Burst spawn(Timeline.Event e, Burst t){
         Burst b = spawn(e);
         

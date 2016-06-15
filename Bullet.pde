@@ -18,7 +18,6 @@ public class Bullet extends Burst implements Drawable, Collideable {
     //println("spawned bullet with " + xspeed + " " + yspeed);
     }//For actual spawning;
     
-    @Override
     private void readData(Event e){ //Lots of variables to have read from the file.
     //Done to be as efficient as possible, but the checks still all happen on spawn and change.
     
