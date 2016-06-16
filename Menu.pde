@@ -10,12 +10,12 @@ class Menu{
     
     void draw(){
         if(z_key == 1){
+            z_key++;
             if(position == true){
                 position = false;
                 subMenu = 1;
             }else if(position == false){
                 gameState = 1;
-                reset();
             }
             z_key++;
         }
@@ -86,12 +86,13 @@ class Menu{
         fill(255);
         strokeWeight(0);
         textAlign(CENTER, CENTER);
+        textSize(15);
         text("How to Play:\nSurvive the waves of bullets without getting hit.\nYou get hit if your small inner circle hits a bullet."+
             "\n\nHow to Score:\nGraze as many bullets as you can.\nYou graze a bullet when it hits your large outer circle."+
-            "\n\nHow to Control:\nArrow keys to move.\nHolding shift makes your small inner circle easier to see,\nbut also makes you move slower."+
+            "\n\nHow to Control:\nArrow keys to move.\nHolding shift makes you slower for better movement,\nand makes your small inner circle more visible too."+
             "\n\nHow to Create:\nFind How_to_Program.txt in the data folder.\nFollow the instructions there to make your own custom levels!" +
-            "\n\nHow to Win:\nTry to beat your time.\nIf you beat the whole level, then try to beat your score instead!"
-            , width/2, height/2);
+            "\n\nHow to Win:\nTry to beat your time.\nIf you beat the whole level, then try to beat your score instead!",
+            width/2, height/2);
         textAlign(LEFT, BOTTOM);
         text("Z to play", 10, 590);
     }

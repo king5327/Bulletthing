@@ -32,6 +32,7 @@ class GameManager implements Tickable{
     boolean tick() { //Good lord I haven't even gotten to the bullets the player spawns. I cry.
         if(esc_key == 1 && gameState == 2){
             esc_key++;
+            pause.reset();
             gameState = 3;
         }
         lastTime = currentTime;

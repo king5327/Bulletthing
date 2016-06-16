@@ -33,6 +33,8 @@ void draw() {
             window.reset();
             if(manager.start()){
                 println("Started");
+                menu.reset();
+                pause.reset();
                 gameState = 2;
             }else{
                 gameState = 0;

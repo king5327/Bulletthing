@@ -13,11 +13,9 @@ class PauseMenu{
             if(position == false){
                 manager.resume();
                 gameState = 2;
-                position = false;
             }else if(position == true){
                 gameState = 0;
                 manager.reset();
-                reset();
             }
         }
         if(esc_key == 1){
