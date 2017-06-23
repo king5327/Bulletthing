@@ -6,16 +6,18 @@ public class Burst extends Timeline implements Templateable {
     private Burst(Event e){
     
         readData(e);
-        println("spawned burst with " + x + " " + y);    
+        //println("spawned burst with " + x + " " + y);    
         
     }//For actual spawning;
     
     private void readData(Event e){
-        x = e.data.containsKey("x") ? Float.parseFloat((String)e.data.get("x")) : 0;
-        y = e.data.containsKey("y") ? Float.parseFloat((String)e.data.get("y")) : 0;
+        
+        //Whether it's from the original spawn or some change (accessible only to bullets and below), this burst's x and y variables are set.
+        if(e.data.containsKey("x")) x = Float.parseFloat((String)e.data.get("x"));
+        if(e.data.containsKey("y")) y = Float.parseFloat((String)e.data.get("y"));
     }
     
-    public Burst(String source){
+    public Burst(String source){ //The super's constructor can handle pretty much all events including custom ones in this file.
         super(source);
     }
     
@@ -35,17 +37,18 @@ public class Burst extends Timeline implements Templateable {
        }
     }
     
-    Burst spawn(Timeline.Event e){
+    @Override
+    public Burst spawn(Timeline.Event e){ //Spawns this at a location and starts it running. Use only on the template object.
         Burst b = new Burst(e);
         b.sourceFile = this.sourceFile;
         b.nextEvent = nextEvent;
         manager.bursts.add(b);
         b.startTime = manager.currentTime;
-        println("New burst " + b.sourceFile + " spawned by " + sourceFile);
+        //println("New burst " + b.sourceFile + " spawned by " + sourceFile);
         return b;
     }
     
-    Burst spawn(Timeline.Event e, Burst t){
+    public Burst spawn(Timeline.Event e, Burst t){
         Burst b = spawn(e);
         
         b.x += t.x;
@@ -55,7 +58,7 @@ public class Burst extends Timeline implements Templateable {
     }
     
     @Override
-    public boolean processEvent(Event e, int time){
+    public boolean processEvent(Event e, int time){ //Handles the same events Timeline would, but uses the overloaded spawner to place the spawned stuff relative to it.
         //println(e.eventType);
         switch(e.eventType){
             case "wait":
@@ -81,7 +84,7 @@ public class Burst extends Timeline implements Templateable {
         return true;
     }
 
-    boolean tick(int time){
+    boolean tick(int time){ //Every tick take the time and with the time tick the burst.
         return super.tick(time);
     }
     

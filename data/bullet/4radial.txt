@@ -1,0 +1,15 @@
+change w 18 h 18 r 9 cr 0 cg 255 cb 0 ca 255
+wait 3000
+
+bullet 3radial xs 1.41421356237 ys 2.41421356237
+bullet 3radial xs -1.41421356237 ys 2.41421356237
+bullet 3radial xs 1.41421356237 ys -0.41421356237
+bullet 3radial xs -1.41421356237 ys -0.41421356237
+bullet 3radial xs 0 ys -1
+bullet 3radial xs 0 ys 3
+bullet 3radial xs -2 ys 1
+bullet 3radial xs 2 ys 1
+
+kill
+
+end

@@ -11,10 +11,10 @@ class GameManager implements Tickable{
     boolean start(){
         reset();
         startTime = tickTime;
-        currentTime = tickTime;
+        currentTime = tickTime; //Makes sure the game starts with a clean slate.
         paused = false;
         player.reset();
-        //placeholder since I'm not going to bother with more than one line for now.
+        
         this.timelines.add(new Timeline("core-main"));
         startTime = tickTime;
         for(Object obj : timelines.toArray()){
@@ -32,6 +32,7 @@ class GameManager implements Tickable{
     boolean tick() { //Good lord I haven't even gotten to the bullets the player spawns. I cry.
         if(esc_key == 1 && gameState == 2){
             esc_key++;
+            pause.reset();
             gameState = 3;
         }
         lastTime = currentTime;
@@ -40,9 +41,9 @@ class GameManager implements Tickable{
         }
         //println(currentTime - lastTime);
         
-        player.move();
+        player.move(currentTime - lastTime);
         player.drawUnder();
-        for (Object obj : timelines.toArray()){ //Tick each of the four types of line (enemies not implemented yet). Remove them if their tick doesn't succeed (false result).
+        for (Object obj : timelines.toArray()){ //Tick each of the four types of timeline (enemies not implemented yet). Remove them if their tick doesn't succeed (false result).
             Timeline line = (Timeline) obj;
             if(! line.tick(currentTime - lastTime)){
                 println("removed a timeline?!");
@@ -77,7 +78,11 @@ class GameManager implements Tickable{
         player.draw();
         
         //println(timelines.size());
-        if(timelines.size() == 0 && bursts.size() == 0 && enemies.size() == 0 && bullets.size() == 0){
+        if(timelines.size() == 0 && bursts.size() == 0 && enemies.size() == 0 && bullets.size() == 0){ //If the round ends in a victory, then do this.
+            endMenu.rescore();
+            if(menu.bestWinScore < window.score) //And update the victory end highscore.
+                menu.bestWinScore = window.score;
+            menu.won = true;
             gameState = 5;
         }
         
@@ -103,7 +108,23 @@ class GameManager implements Tickable{
         resume();
     }
     
-    void notifyDead(){
+    void notifyDead(){ //Called by player upon death.
+        endMenu.rescore();
+        
+        if((manager.currentTime - manager.startTime)/1000f > menu.bestTime){ //Handles best-time scenarios.
+            if(((manager.currentTime - manager.startTime)/1000f == menu.bestTime && (window.score > menu.bestTimeScore))  || (manager.currentTime - manager.startTime)/1000f > menu.bestTime)
+                menu.bestTimeScore = window.score;
+            menu.bestTime = (manager.currentTime - manager.startTime)/1000f;
+        }
+        
+        if(window.score > menu.bestScore){ //Handles best score scenarios.
+            if(((window.score == menu.bestScore) && (manager.currentTime - manager.startTime)/1000f > menu.bestScoreTime) || (window.score > menu.bestScore))
+                menu.bestScoreTime = (manager.currentTime - manager.startTime)/1000f;
+            menu.bestScore = window.score;
+        }
+        
+        menu.scored = true; //Only one variable for both since it's guaranteed after the first death both will be set.
+        
         gameState = 4;
     }
     

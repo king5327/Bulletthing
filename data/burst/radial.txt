@@ -1,7 +1,10 @@
+bullet plopout xs 1.41421356237 ys 2.41421356237
+bullet plopout xs -1.41421356237 ys 2.41421356237
+bullet plopout xs 1.41421356237 ys -0.41421356237
+bullet plopout xs -1.41421356237 ys -0.41421356237
+bullet plopout xs 0 ys -1
 bullet plopout xs 0 ys 3
-bullet plopout xs 1 ys 2
-bullet plopout xs 2 ys 1
-bullet plopout xs -1 ys 2
 bullet plopout xs -2 ys 1
+bullet plopout xs 2 ys 1
 
 end

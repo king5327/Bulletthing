@@ -5,6 +5,7 @@ class PauseMenu{
     int rectY = 300;
     
     //Um... an exit button and a resume button, I guess.
+    //And, of course, code copied from the menu for the actual handling of the selection.
     
     void draw(){
         if(z_key == 1){
@@ -12,11 +13,9 @@ class PauseMenu{
             if(position == false){
                 manager.resume();
                 gameState = 2;
-                position = false;
             }else if(position == true){
                 gameState = 0;
                 manager.reset();
-                reset();
             }
         }
         if(esc_key == 1){

@@ -1,0 +1,9 @@
+change cr 200 cb 255 cg 200 ca 150 r 10 w 24 h 24 sw 2 sr 255 sb 200 sg 255 sa 75
+
+wait 2000
+
+bullet 4radial
+bullet 3radial xs 3 ys 1
+bullet 3radial xs -3 ys 1
+
+kill

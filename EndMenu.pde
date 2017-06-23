@@ -1,10 +1,17 @@
 class EndMenu{
     
-    //Um... an exit button and a resume button, I guess.
+    //Um... a message and an exit button. That's all this does.
+    
+    String lastScores;
     
     void draw(){
         if(z_key == 1){
             z_key++;
+            gameState = 0;
+            manager.reset();
+        }
+        if(esc_key == 1){
+            esc_key++;
             gameState = 0;
             manager.reset();
         }
@@ -13,6 +20,8 @@ class EndMenu{
         }else if(gameState == 5){
             drawPass();
         }
+        
+        
         
     }
     
@@ -29,6 +38,10 @@ class EndMenu{
         text("You survived " + (manager.currentTime - manager.startTime)/1000f + "s\nYour score: " + window.score, width/2, 350);
         textAlign(LEFT, BOTTOM);
         text("Z to return to the menu", 10, height-10);
+        
+        textSize(12);
+        textAlign(RIGHT, BOTTOM);
+        text(lastScores, width - 10, height - 10);
     }
     
     void drawPass(){
@@ -44,6 +57,10 @@ class EndMenu{
         textAlign(LEFT, BOTTOM);
         text("Z to return to the menu", 10, height-10);
         
+    }
+    
+    void rescore(){ //Gives EndMenu the notification that the scores are about to be changed and that it should update to them first.
+        lastScores = menu.scoreLines;
     }
     
 }

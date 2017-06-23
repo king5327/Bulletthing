@@ -6,13 +6,13 @@ HashMap templates = new HashMap(); //This would normally go inside Timeline, but
 Window window;
 PauseMenu pause;
 int tickTime;
-EndMenu endmenu = new EndMenu();
+EndMenu endMenu = new EndMenu();
 
 int up_key = 0, down_key = 0, left_key = 0, right_key = 0, shift_key = 0, z_key = 0, x_key = 0, esc_key = 0;
-int left = 25, right = 375, top = 25, bottom = 575;
+int left = 25, right = 375, top = 25, bottom = 575; //If you change these god help anybody who made any levels because they don't conform to the standard.
 
 void setup() {
-    size(600, 600);
+    size(600, 600); //DO NOT change the screen size. It will do nothing, as there's no scaling.
     gameState = 0;
     window = new Window(left, right, top, bottom);
     frameRate(60);
@@ -25,44 +25,46 @@ void draw() {
     tickTime = millis();
     //Cleanup, then pick stage, then run as it will.
     switch(gameState){
-        case 0:
+        case 0: //Menu
             background(0);
             menu.draw();
             break;
-        case 1:
+        case 1: //Pregame setup, run only once, unless failed for whatever reason.
             window.reset();
             if(manager.start()){
                 println("Started");
+                menu.reset();
+                pause.reset();
                 gameState = 2;
             }else{
                 gameState = 0;
                 menu.reset();
                 break;
             }
-        case 2:
+        case 2: //Game
             background(200);
             manager.resume();
             manager.tick();
             window.draw();
             break;
-        case 3:
+        case 3: //Pause, just for fun.
             background(200);
             manager.pause();
             manager.tick();
             window.draw();
             pause.draw();
             break;
-        case 4:
+        case 4://Both of these are Ends, but one's bad end and the other's good end.
         case 5:
             background(0);
-            endmenu.draw();
+            endMenu.draw();
             break;
         default:
             break;
     }
 }
 
-void keyPressed() { //Handle keypresses.
+void keyPressed() { //Handle keypresses. Releases set to zero, but don't update it if it's held and other parts change the variable to something other than 0 or 1.
     if (key == CODED) {
         switch(keyCode) {
         case UP:

@@ -1,4 +1,4 @@
-interface Collideable extends Drawable{
+interface Collideable extends Drawable{ //A set of methods for ensuring smooth collision handling.
     boolean collide(Collideable other);
     float getX();
     float getY();

@@ -1,0 +1,21 @@
+bullet lefthazer ys 1
+
+wait 1000
+
+bullet lefthazer ys 2
+
+wait 2000
+
+bullet lefthazer ys 3
+
+wait 3000
+
+bullet lefthazer ys 4
+
+wait 4000
+
+bullet lefthazer ys 5
+
+wait 5000
+
+bullet lefthazer ys 6

@@ -1,3 +1,5 @@
+change cr 0 cg 0 cb 0 ca 255 r 5 w 10 h 10
+
 wait 6000
 
 // set cr 0 cg 0 cb 0 ca 255

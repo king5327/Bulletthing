@@ -1,0 +1,71 @@
+change w 10 h 5 r 2.5 ya 0.1
+
+bullet plopout xs -2 xa -0.02
+
+wait 500
+
+bullet plopout xs -2 xa -0.02
+
+wait 500
+
+bullet plopout xs -2 xa -0.02
+
+wait 500
+
+bullet plopout xs -2 xa -0.02
+
+wait 500
+
+bullet plopout xs -2 xa -0.02
+
+wait 500
+
+bullet plopout xs -2 xa -0.02
+
+wait 500
+
+bullet plopout xs -2 xa -0.02
+
+wait 500
+
+bullet plopout xs -2 xa -0.02
+
+wait 500
+
+bullet plopout xs -2 xa -0.02
+
+wait 500
+
+bullet plopout xs -2 xa -0.02
+
+wait 500
+
+bullet plopout xs -2 xa -0.02
+
+wait 500
+
+bullet plopout xs -2 xa -0.02
+
+wait 500
+
+bullet plopout xs -2 xa -0.02
+
+wait 500
+
+bullet plopout xs -2 xa -0.02
+
+wait 500
+
+bullet plopout xs -2 xa -0.02
+
+wait 500
+
+bullet plopout xs -2 xa -0.02
+
+wait 500
+
+bullet plopout xs -2 xa -0.02
+
+wait 500
+
+end
